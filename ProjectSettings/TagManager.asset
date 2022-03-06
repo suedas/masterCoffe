@@ -7,6 +7,16 @@ TagManager:
   - obstacle
   - collectible
   - finish
+  - left
+  - right
+  - sag
+  - sol
+  - -2
+  - x3
+  - -10
+  - +8
+  - "b\xF6l\xFC2"
+  - +12
   layers:
   - Default
   - TransparentFX
