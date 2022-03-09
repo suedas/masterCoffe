@@ -14,7 +14,6 @@ public class SwerveMovement : MonoBehaviour
     private float lastMousePosX;
     public Sequence seq;
     public List<GameObject> Coffes = new List<GameObject>();
-    float coffeHeight = 0.438f;
 
     #region Singleton
     public static SwerveMovement instance;

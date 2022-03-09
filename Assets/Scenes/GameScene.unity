@@ -185,7 +185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8612313}
-  m_LocalRotation: {x: 0.10210514, y: 0.000000017998806, z: -0.0000000018474258, w: 0.9947736}
+  m_LocalRotation: {x: 0.10210514, y: -0.00000001799881, z: 0.0000000018474261, w: 0.9947736}
   m_LocalPosition: {x: 0, y: 4, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 92903233}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -609,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150138993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.129, z: 0}
+  m_LocalPosition: {x: 0, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 0.030951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 386329366}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: +12
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1681,11 +1681,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386329364}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 2.1398501, z: 1}
+  m_Center: {x: 0, y: 0.56992495, z: 0}
 --- !u!23 &386329367
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1747,7 +1747,7 @@ GameObject:
   - component: {fileID: 387597147}
   m_Layer: 0
   m_Name: NegativeGate (1)
-  m_TagString: -10
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2009,7 +2009,7 @@ GameObject:
   - component: {fileID: 566055096}
   m_Layer: 0
   m_Name: PozitiveGate
-  m_TagString: x3
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2253,7 +2253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806381252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.617, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 0.030951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2414,7 +2414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812313550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.639, z: 0}
+  m_LocalPosition: {x: 0, y: 3.6, z: 0}
   m_LocalScale: {x: 1, y: 0.030950999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2433,7 +2433,7 @@ GameObject:
   - component: {fileID: 862887630}
   m_Layer: 0
   m_Name: NegativeGate (2)
-  m_TagString: "b\xF6l\xFC2"
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2546,7 +2546,7 @@ GameObject:
   - component: {fileID: 981232344}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: "b\xF6l\xFC2"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2966,7 +2966,7 @@ GameObject:
   - component: {fileID: 1118910058}
   m_Layer: 0
   m_Name: PozitiveGate (2)
-  m_TagString: +8
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3138,7 +3138,7 @@ GameObject:
   - component: {fileID: 1130921613}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: -10
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3572,7 +3572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335958725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.999, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 0.030951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3591,7 +3591,7 @@ GameObject:
   - component: {fileID: 1367057882}
   m_Layer: 0
   m_Name: PozitiveGate (1)
-  m_TagString: +12
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3725,7 +3725,7 @@ GameObject:
   - component: {fileID: 1374097165}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: x3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4457,7 +4457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567798979}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.397, z: 0}
+  m_LocalPosition: {x: 0, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 0.030951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4555,7 +4555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589647995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.797, z: 0}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 0.030950999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4936,7 +4936,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654838904}
-  m_LocalRotation: {x: 0.10210514, y: 0.000000017998806, z: -0.0000000018474258, w: 0.9947736}
+  m_LocalRotation: {x: 0.10210514, y: -0.00000001799881, z: 0.0000000018474261, w: 0.9947736}
   m_LocalPosition: {x: 0, y: 4, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5184,7 +5184,7 @@ GameObject:
   - component: {fileID: 1788704942}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: +8
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5446,7 +5446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808266460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.291, z: 0}
+  m_LocalPosition: {x: 0, y: 3.2, z: 0}
   m_LocalScale: {x: 1, y: 0.030950999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
