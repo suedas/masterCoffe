@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    [SerializeField] private float speed = 1f;
+    #region Singleton
+    public static PlayerMovement instance;
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(this);
+    }
+    #endregion
+    public float speed = 1f;
 
     private void Update()
     {

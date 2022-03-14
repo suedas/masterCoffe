@@ -10,6 +10,7 @@ public class SwerveMovement : MonoBehaviour
     //public Transform coffe;
     public Transform rightParent, leftParent;
 
+
     private float deltaPos;
     private float lastMousePosX;
     public Sequence seq;
@@ -28,7 +29,7 @@ public class SwerveMovement : MonoBehaviour
     {
 
         //var coffe = Coffes.Count;
-
+        //Debug.Log( leftParent.transform.childCount);
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePosX = Input.mousePosition.x;
