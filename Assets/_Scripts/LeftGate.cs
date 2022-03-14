@@ -14,7 +14,7 @@ public class LeftGate : MonoBehaviour
         if (other.gameObject.CompareTag("-2"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(DestroyMe(4));
+            StartCoroutine(DestroyMe(2));
         }
 
         else if (other.gameObject.CompareTag("-10"))
@@ -56,29 +56,37 @@ public class LeftGate : MonoBehaviour
         for (int i = 0; i < adet; i++)
         {
             int count = SwerveMovement.instance.leftParent.childCount;
+            int text = SwerveMovement.instance.leftParent.childCount + 1;
+
             if (count > 0)
             {
                 Destroy(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
                 SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
                 count = SwerveMovement.instance.leftParent.childCount;
-                LeftCount.text = count.ToString(); 
+                LeftCount.text = text.ToString(); 
             }
             yield return new WaitForSeconds(.05f);
         }
     }
     IEnumerator InstantiateMe(int sayac)
     {
-        int number = SwerveMovement.instance.leftParent.childCount;
-        if (number > 0)
+        for (int i = 0; i < sayac; i++)
         {
-            Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
-                      leftParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
-            Instantiate(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
-               leftParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
-            SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
-            LeftCount.text = number.ToString(); 
+            int number = SwerveMovement.instance.leftParent.childCount;
+            int text = SwerveMovement.instance.leftParent.childCount + 1;
 
+            if (number > 0)
+            {
+                Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
+                          leftParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
+                Instantiate(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
+                   leftParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
+                SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
+                LeftCount.text = text.ToString();
+
+            }
+            yield return new WaitForSeconds(.05f);
         }
-        yield return new WaitForSeconds(.05f);
+        
     }
 }

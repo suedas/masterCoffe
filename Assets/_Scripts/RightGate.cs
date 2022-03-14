@@ -57,29 +57,36 @@ public class RightGate : MonoBehaviour
         for (int i = 0; i < adet; i++)
         {
             int count = SwerveMovement.instance.rightParent.childCount;
+            int text = SwerveMovement.instance.rightParent.childCount + 1;
+
             if (count > 0)
             {
                 Destroy(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
                 SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
                 count = SwerveMovement.instance.rightParent.childCount;
-                RightCount.text = count.ToString(); //yanlis deger
+                RightCount.text = text.ToString(); 
             }
             yield return new WaitForSeconds(.05f);
         }
     }
     IEnumerator InstantiateMe(int sayac)
     {
-        int number = SwerveMovement.instance.rightParent.childCount;
-        if (number > 0)
+        for (int i = 0; i < sayac; i++)
         {
-            Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
-                      rightParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
-            Instantiate(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
-               rightParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
-            SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
-            RightCount.text = number.ToString(); //yanlis deger
+            int number = SwerveMovement.instance.rightParent.childCount;
+            int text = SwerveMovement.instance.rightParent.childCount + 1;
+            if (number > 0)
+            {
+                Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
+                          rightParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
+                Instantiate(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
+                   rightParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
+                SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
+                RightCount.text = text.ToString(); 
 
+            }
+            yield return new WaitForSeconds(.05f);
         }
-        yield return new WaitForSeconds(.05f);
+      
     }
 }
