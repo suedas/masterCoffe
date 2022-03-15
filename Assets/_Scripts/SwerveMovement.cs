@@ -60,7 +60,7 @@ public class SwerveMovement : MonoBehaviour
                             {
                                 //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
                             }));
-                            Debug.Log("sol");
+                            //Debug.Log("sol");
                         }
                     }
 
@@ -106,7 +106,7 @@ public class SwerveMovement : MonoBehaviour
                             {
                                 //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
                             }));
-                            Debug.Log("sol");
+                            //Debug.Log("sol");
                         }
                     }
 

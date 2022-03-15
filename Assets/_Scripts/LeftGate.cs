@@ -5,7 +5,15 @@ using TMPro;
 
 public class LeftGate : MonoBehaviour
 {
-    public TMP_Text LeftCount;
+    #region Singleton
+    public static LeftGate instance;
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(this);
+    }
+    #endregion
+    public TextMeshProUGUI LeftCount;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -15,6 +23,8 @@ public class LeftGate : MonoBehaviour
         {
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyMe(2));
+
+
         }
 
         else if (other.gameObject.CompareTag("-10"))
@@ -25,9 +35,14 @@ public class LeftGate : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("bölü2"))
         {
-            int child = SwerveMovement.instance.rightParent.childCount / 2;
+            int child = SwerveMovement.instance.leftParent.childCount / 2;
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyMe(child));
+        }
+        else if (other.gameObject.CompareTag("obstacle"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(DestroyMe(3));
         }
         #endregion
         #region PozitiveGate
@@ -65,6 +80,10 @@ public class LeftGate : MonoBehaviour
                 count = SwerveMovement.instance.leftParent.childCount;
                 LeftCount.text = text.ToString(); 
             }
+            else
+            {
+                //losePanel
+            }
             yield return new WaitForSeconds(.05f);
         }
     }
@@ -84,6 +103,10 @@ public class LeftGate : MonoBehaviour
                 SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
                 LeftCount.text = text.ToString();
 
+            }
+            else
+            {
+                //losePanel
             }
             yield return new WaitForSeconds(.05f);
         }

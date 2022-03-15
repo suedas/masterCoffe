@@ -6,7 +6,15 @@ using TMPro;
 
 public class RightGate : MonoBehaviour
 {
-    public TMP_Text RightCount;
+    #region Singleton
+    public static RightGate instance;
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(this);
+    }
+    #endregion
+    public TextMeshProUGUI RightCount;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -29,6 +37,11 @@ public class RightGate : MonoBehaviour
             int child = SwerveMovement.instance.rightParent.childCount / 2;
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyMe(child));
+        }
+        else if (other.gameObject.CompareTag("obstacle"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(DestroyMe(3));
         }
         #endregion
         #region PozitiveGate
@@ -66,6 +79,10 @@ public class RightGate : MonoBehaviour
                 count = SwerveMovement.instance.rightParent.childCount;
                 RightCount.text = text.ToString(); 
             }
+            else
+            {
+                //losePanel
+            }
             yield return new WaitForSeconds(.05f);
         }
     }
@@ -84,6 +101,10 @@ public class RightGate : MonoBehaviour
                 SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
                 RightCount.text = text.ToString(); 
 
+            }
+            else
+            {
+                //losePanel
             }
             yield return new WaitForSeconds(.05f);
         }
