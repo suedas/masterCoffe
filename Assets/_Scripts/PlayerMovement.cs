@@ -16,8 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (SwerveMovement.instance.hareket==true)
+        {
+            transform.Translate(0, 0, speed * Time.deltaTime);
+        }
 
-        transform.Translate(0, 0, speed * Time.deltaTime);
+        
       
     }
 

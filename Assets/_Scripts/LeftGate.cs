@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class LeftGate : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class LeftGate : MonoBehaviour
         else if (other.gameObject.CompareTag("obstacle"))
         {
             other.GetComponent<Collider>().enabled = false;
+            Camera.main.DOShakeRotation(1, 3, fadeOut: true);
             StartCoroutine(DestroyMe(3));
         }
         #endregion

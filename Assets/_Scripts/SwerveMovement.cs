@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SwerveMovement : MonoBehaviour
 { //[SerializeField] private float swerveSpeed = .5f;
@@ -15,7 +16,9 @@ public class SwerveMovement : MonoBehaviour
     private float lastMousePosX;
     public Sequence seq;
     public List<GameObject> Coffes = new List<GameObject>();
-
+    public bool hareket;
+    public Button PlayButton;
+    
     #region Singleton
     public static SwerveMovement instance;
     void Awake()
@@ -27,9 +30,20 @@ public class SwerveMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (hareket==true)
+        {
+            Movement();
+        }
+       
+    }
+    private void Start()
+    {
+        hareket = false;
+    }
 
-        //var coffe = Coffes.Count;
-        //Debug.Log( leftParent.transform.childCount);
+    void Movement ()
+    {
+
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePosX = Input.mousePosition.x;
@@ -58,8 +72,8 @@ public class SwerveMovement : MonoBehaviour
                             seq.Join(Coffes[i].transform.DOLocalJump(left, 6 - Coffes[i].transform.localPosition.y, 1, 2f).
                             Join(Coffes[i].transform.DOLocalRotate(new Vector3(0, 0, 360), 2f, RotateMode.FastBeyond360)).OnComplete(() =>
                             {
-                                //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
-                            }));
+                                    //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
+                                }));
                             //Debug.Log("sol");
                         }
                     }
@@ -104,8 +118,8 @@ public class SwerveMovement : MonoBehaviour
                             seq.Join(Coffes[i].transform.DOLocalJump(right, 6 - Coffes[i].transform.localPosition.y, 1, 2f).
                             Join(Coffes[i].transform.DOLocalRotate(new Vector3(0, 0, 360), 2f, RotateMode.FastBeyond360)).OnComplete(() =>
                             {
-                                //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
-                            }));
+                                    //coffe.transform.DOScale(new Vector3(coffe.transform.localScale.x * 1.2f, coffe.transform.localScale.y * 1.2f, coffe.transform.localScale.z), 0.1f).From();
+                                }));
                             //Debug.Log("sol");
                         }
                     }
@@ -149,5 +163,11 @@ public class SwerveMovement : MonoBehaviour
 
             }
         }
+    }
+    public void ClickPlayBtn()
+    {
+        hareket = true;
+        PlayButton.gameObject.SetActive(false);
+        Debug.Log("butona basýldý ");
     }
 }

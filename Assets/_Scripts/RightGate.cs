@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using DG.Tweening;
+using Cinemachine;
 
 public class RightGate : MonoBehaviour
 {
     #region Singleton
     public static RightGate instance;
+    public TextMeshProUGUI RightCount;
+    public CinemachineVirtualCamera vcam;
     void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(this);
     }
     #endregion
-    public TextMeshProUGUI RightCount;
-
+  
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -41,6 +43,8 @@ public class RightGate : MonoBehaviour
         else if (other.gameObject.CompareTag("obstacle"))
         {
             other.GetComponent<Collider>().enabled = false;
+           .DOShakeRotation(1, 3, fadeOut: true);
+            
             StartCoroutine(DestroyMe(3));
         }
         #endregion
