@@ -26,6 +26,7 @@ public class RightGate : MonoBehaviour
         {
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyMe(4));
+            
         }
 
         else if (other.gameObject.CompareTag("-10"))
@@ -42,10 +43,11 @@ public class RightGate : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("obstacle"))
         {
-            other.GetComponent<Collider>().enabled = false;
-           .DOShakeRotation(1, 3, fadeOut: true);
-            
+            //vcam.transform.DOShakeRotation(0.2f, 30, fadeOut: true);
+            other.GetComponent<Collider>().enabled = false;        
             StartCoroutine(DestroyMe(3));
+            StartCoroutine(Shake());
+            //Debug.Log("engelll");
         }
         #endregion
         #region PozitiveGate
@@ -113,5 +115,14 @@ public class RightGate : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
       
+    }
+    IEnumerator Shake()
+    {
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.5f);
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+
     }
 }

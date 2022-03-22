@@ -43,7 +43,7 @@ public class LeftGate : MonoBehaviour
         else if (other.gameObject.CompareTag("obstacle"))
         {
             other.GetComponent<Collider>().enabled = false;
-            Camera.main.DOShakeRotation(1, 3, fadeOut: true);
+            StartCoroutine(Shake());
             StartCoroutine(DestroyMe(3));
         }
         #endregion
@@ -113,5 +113,14 @@ public class LeftGate : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
         
+    }
+    IEnumerator Shake()
+    {
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+        yield return new WaitForSeconds(0.5f);
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+
     }
 }
