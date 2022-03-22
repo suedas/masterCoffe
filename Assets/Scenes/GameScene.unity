@@ -185,7 +185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8612313}
-  m_LocalRotation: {x: 0.10210514, y: 0.0000000179988, z: -0.0000000018474252, w: 0.9947736}
+  m_LocalRotation: {x: 0.10210513, y: -0.000000016942627, z: 0.0000000017390178, w: 0.9947736}
   m_LocalPosition: {x: 0, y: 4, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -848,6 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RightCount: {fileID: 848393886}
+  vcam: {fileID: 8612314}
 --- !u!114 &175526552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,6 +864,9 @@ MonoBehaviour:
   leftHand: {fileID: 1597856538}
   rightHand: {fileID: 175526547}
   winPanel: {fileID: 904150160}
+  goLeft: {x: 0, y: 0, z: 0}
+  goRight: {x: 0, y: 0, z: 0}
+  listCount: 28
 --- !u!1 &228092296
 GameObject:
   m_ObjectHideFlags: 0
@@ -5783,6 +5787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftCount: {fileID: 878980986}
+  vcam: {fileID: 8612314}
 --- !u!114 &1597856541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5798,6 +5803,9 @@ MonoBehaviour:
   leftHand: {fileID: 1597856538}
   rightHand: {fileID: 175526547}
   winPanel: {fileID: 904150160}
+  goLeft: {x: 0, y: 0, z: 0}
+  goRight: {x: 0, y: 0, z: 0}
+  listCount: 28
 --- !u!1 &1606908143
 GameObject:
   m_ObjectHideFlags: 0
@@ -6002,7 +6010,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654838904}
-  m_LocalRotation: {x: 0.10210514, y: 0.0000000179988, z: -0.0000000018474252, w: 0.9947736}
+  m_LocalRotation: {x: 0.10210513, y: -0.000000016942627, z: 0.0000000017390178, w: 0.9947736}
   m_LocalPosition: {x: 0, y: 4, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6056,6 +6064,7 @@ GameObject:
   - component: {fileID: 1699532579}
   - component: {fileID: 1699532578}
   - component: {fileID: 1699532577}
+  - component: {fileID: 1699532580}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -6139,6 +6148,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1699532580
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699532575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 670.36694, y: 486.8464, z: 199.04553}
 --- !u!1 &1770935136
 GameObject:
   m_ObjectHideFlags: 0

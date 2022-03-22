@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Cinemachine;
+
 
 public class LeftGate : MonoBehaviour
 {
+    public TextMeshProUGUI LeftCount;
+    public CinemachineVirtualCamera vcam;
+
     #region Singleton
     public static LeftGate instance;
     void Awake()
@@ -14,7 +19,7 @@ public class LeftGate : MonoBehaviour
         else Destroy(this);
     }
     #endregion
-    public TextMeshProUGUI LeftCount;
+  
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
