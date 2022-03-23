@@ -3,6 +3,8 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class SwerveMovement : MonoBehaviour
 { //[SerializeField] private float swerveSpeed = .5f;
@@ -17,8 +19,15 @@ public class SwerveMovement : MonoBehaviour
     public Sequence seq;
     public List<GameObject> Coffes = new List<GameObject>();
     public bool hareket;
-    public Button PlayButton;
+   // public Button PlayButton;
+    public GameObject tapToStartPanel,losePanel;
     
+    
+    public TextMeshProUGUI RightCount;
+    public TextMeshProUGUI LeftCount;
+
+
+
     #region Singleton
     public static SwerveMovement instance;
     void Awake()
@@ -34,7 +43,16 @@ public class SwerveMovement : MonoBehaviour
         {
             Movement();
         }
-       
+        int rightText = rightParent.childCount;
+        RightCount.text = rightText.ToString();
+        int leftText = leftParent.childCount;
+        LeftCount.text = leftText.ToString();
+
+        if (Coffes.Count==0)
+        {
+            losePanel.SetActive(true);
+            PlayerMovement.instance.speed = 0;
+        }
     }
     private void Start()
     {
@@ -167,7 +185,9 @@ public class SwerveMovement : MonoBehaviour
     public void ClickPlayBtn()
     {
         hareket = true;
-        PlayButton.gameObject.SetActive(false);
+        PlayerMovement.instance.speed = 4;
+        //PlayButton.gameObject.SetActive(false);
+        tapToStartPanel.SetActive(false);
         Debug.Log("butona basýldý ");
     }
 }

@@ -9,7 +9,7 @@ public class RightGate : MonoBehaviour
 {
     #region Singleton
     public static RightGate instance;
-    public TextMeshProUGUI RightCount;
+    //public TextMeshProUGUI RightCount;
     public CinemachineVirtualCamera vcam;
     void Awake()
     {
@@ -76,18 +76,14 @@ public class RightGate : MonoBehaviour
         for (int i = 0; i < adet; i++)
         {
             int count = SwerveMovement.instance.rightParent.childCount;
-            int text = SwerveMovement.instance.rightParent.childCount + 1;
+           // int text = SwerveMovement.instance.rightParent.childCount + 1;
 
             if (count > 0)
             {
                 Destroy(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
                 SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
                 count = SwerveMovement.instance.rightParent.childCount;
-                RightCount.text = text.ToString(); 
-            }
-            else
-            {
-                //losePanel
+               // RightCount.text = text.ToString(); 
             }
             yield return new WaitForSeconds(.05f);
         }
@@ -97,7 +93,7 @@ public class RightGate : MonoBehaviour
         for (int i = 0; i < sayac; i++)
         {
             int number = SwerveMovement.instance.rightParent.childCount;
-            int text = SwerveMovement.instance.rightParent.childCount + 1;
+           // int text = SwerveMovement.instance.rightParent.childCount + 1;
             if (number > 0)
             {
                 Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
@@ -105,13 +101,9 @@ public class RightGate : MonoBehaviour
                 Instantiate(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
                    rightParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
                 SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
-                RightCount.text = text.ToString(); 
+               // RightCount.text = text.ToString(); 
 
-            }
-            else
-            {
-                //losePanel
-            }
+            }          
             yield return new WaitForSeconds(.05f);
         }
       
