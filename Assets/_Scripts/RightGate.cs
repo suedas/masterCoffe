@@ -7,10 +7,11 @@ using Cinemachine;
 
 public class RightGate : MonoBehaviour
 {
+    public CinemachineVirtualCamera vcam;
+
     #region Singleton
     public static RightGate instance;
     //public TextMeshProUGUI RightCount;
-    public CinemachineVirtualCamera vcam;
     void Awake()
     {
         if (instance == null) instance = this;

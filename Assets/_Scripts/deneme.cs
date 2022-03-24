@@ -6,7 +6,6 @@ using DG.Tweening;
 public class deneme : MonoBehaviour
 {
     public Rigidbody leftHand, rightHand;
-    public GameObject winPanel;
     bool sagdanGit;
     void OyunSonu()
     {
@@ -21,9 +20,8 @@ public class deneme : MonoBehaviour
 
         if (other.CompareTag("finish"))
         {
-
-            SwerveMovement.instance.LeftCount.enabled = false;
-            SwerveMovement.instance.RightCount.enabled = false;
+            UIController.instance.LeftCount.enabled = false;
+            UIController.instance.RightCount.enabled = false;
 
             //StartCoroutine(Stop());
             StartCoroutine(IncreaseTime());
@@ -49,6 +47,10 @@ public class deneme : MonoBehaviour
             }
             else
             {
+                if(SwerveMovement.instance.leftParent.childCount == 0 && SwerveMovement.instance.rightParent.childCount == 0)
+                {
+                    UIController.instance.WinPanel();
+                }
                 sagdanGit = false;
                 ServisEt(other);
             }
@@ -64,12 +66,18 @@ public class deneme : MonoBehaviour
             }
             else
             {
+                if (SwerveMovement.instance.leftParent.childCount == 0 && SwerveMovement.instance.rightParent.childCount == 0)
+                {
+                    UIController.instance.WinPanel();
+                }
                 sagdanGit = true;
                 ServisEt(other);
+
             }
 
            
         }
+        
     }
 
     IEnumerator IncreaseTime()

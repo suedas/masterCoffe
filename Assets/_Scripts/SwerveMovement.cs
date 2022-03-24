@@ -19,13 +19,6 @@ public class SwerveMovement : MonoBehaviour
     public Sequence seq;
     public List<GameObject> Coffes = new List<GameObject>();
     public bool hareket;
-   // public Button PlayButton;
-    public GameObject tapToStartPanel,losePanel;
-    
-    
-    public TextMeshProUGUI RightCount;
-    public TextMeshProUGUI LeftCount;
-
 
 
     #region Singleton
@@ -43,16 +36,8 @@ public class SwerveMovement : MonoBehaviour
         {
             Movement();
         }
-        int rightText = rightParent.childCount;
-        RightCount.text = rightText.ToString();
-        int leftText = leftParent.childCount;
-        LeftCount.text = leftText.ToString();
-
-        if (Coffes.Count==0)
-        {
-            losePanel.SetActive(true);
-            PlayerMovement.instance.speed = 0;
-        }
+        UIController.instance.coffeCountText();
+        UIController.instance.LosePanel();
     }
     private void Start()
     {
@@ -184,10 +169,6 @@ public class SwerveMovement : MonoBehaviour
     }
     public void ClickPlayBtn()
     {
-        hareket = true;
-        PlayerMovement.instance.speed = 4;
-        //PlayButton.gameObject.SetActive(false);
-        tapToStartPanel.SetActive(false);
-        Debug.Log("butona basýldý ");
+        UIController.instance.tapToStart();
     }
 }
