@@ -118,4 +118,16 @@ public class RightGate : MonoBehaviour
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
 
     }
+    private void Update()
+    {
+        if (SwerveMovement.instance.hareket == true)
+        {
+            pingPongRight();
+        }
+    }
+    public void pingPongRight()
+    {
+        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
+
+    }
 }

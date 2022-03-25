@@ -35,6 +35,8 @@ public class SwerveMovement : MonoBehaviour
         if (hareket==true)
         {
             Movement();
+            UIController.instance.Score();
+            
         }
         UIController.instance.coffeCountText();
         UIController.instance.LosePanel();

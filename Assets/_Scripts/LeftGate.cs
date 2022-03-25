@@ -19,8 +19,8 @@ public class LeftGate : MonoBehaviour
         else Destroy(this);
     }
     #endregion
-  
 
+    
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -126,6 +126,18 @@ public class LeftGate : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+
+    }
+    private void Update()
+    {
+        if (SwerveMovement.instance.hareket==true)
+        {
+            pingPongLeft();
+        }
+    }
+    public void pingPongLeft()
+    {
+      transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
 
     }
 }

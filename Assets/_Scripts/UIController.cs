@@ -7,8 +7,8 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     public GameObject tapToStartPanel, losePanel, winPanel;
-    public TextMeshProUGUI RightCount, LeftCount;
-
+    public TextMeshProUGUI RightCount, LeftCount,ScoreText;
+    //public GameObject leftHand, rightHand;
     #region Singleton
     public static UIController instance;
     //public TextMeshProUGUI RightCount;
@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour
         //PlayButton.gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
         Debug.Log("butona basýldý ");
+
     }
     public void coffeCountText()
     {
@@ -46,6 +47,11 @@ public class UIController : MonoBehaviour
         winPanel.SetActive(true);
         PlayerMovement.instance.speed = 0;
 
+    }
+    public void Score()
+    {
+       int score= SwerveMovement.instance.Coffes.Count;
+        ScoreText.text = score.ToString();
     }
 
 }
