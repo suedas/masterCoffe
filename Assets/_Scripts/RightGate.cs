@@ -8,6 +8,7 @@ using Cinemachine;
 public class RightGate : MonoBehaviour
 {
     public CinemachineVirtualCamera vcam;
+    public GameObject cupPrefab;
 
     #region Singleton
     public static RightGate instance;
@@ -76,38 +77,70 @@ public class RightGate : MonoBehaviour
     {
         for (int i = 0; i < adet; i++)
         {
-            int count = SwerveMovement.instance.rightParent.childCount;
+            int count = GameManager.instance.rightParent.transform.childCount;
            // int text = SwerveMovement.instance.rightParent.childCount + 1;
 
             if (count > 0)
             {
-                Destroy(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
-                SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
-                count = SwerveMovement.instance.rightParent.childCount;
+                if(GameManager.instance.yPosRight > .5f)GameManager.instance.yPosRight-=1;
+                GameObject obj = GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount  - 1).gameObject;
+                obj.transform.parent = null;
+                GameManager.instance.Coffes.Remove(obj);
+                obj.transform.position = new Vector3(0, 100, 0);
+                for (int j = 0; j < GameManager.instance.rightParent.transform.childCount; j++)
+                {
+                    Vector3 position = GameManager.instance.rightParent.transform.GetChild(j).transform.position;
+                    GameManager.instance.rightParent.transform.GetChild(j).transform.position =
+                        new Vector3(position.x, j - 1, position.z);
+                }
+                GameObject obj2 = Instantiate(cupPrefab, new Vector3(2,GameManager.instance.yPosRight,0), Quaternion.identity);
+                obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+                    Destroy(obj2);
+                });
+                GameManager.instance.BebeleriSirala();
+                //GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount -i- 1).parent = null;
+                //GameManager.instance.Coffes.Remove(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount -i- 1).gameObject);
+                //GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount -i- 1).DOMoveY(50,2).OnComplete(()=> {
+                //    Destroy(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount -i- 1).gameObject);
+                //});
+
+
+                count = GameManager.instance.rightParent.transform.childCount;
                // RightCount.text = text.ToString(); 
             }
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.01f);
         }
+        
+
+            
     }
     IEnumerator InstantiateMe(int sayac)
     {
         for (int i = 0; i < sayac; i++)
         {
-            int number = SwerveMovement.instance.rightParent.childCount;
+            int number = GameManager.instance.rightParent.transform.childCount;
            // int text = SwerveMovement.instance.rightParent.childCount + 1;
             if (number > 0)
             {
-                Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
-                          rightParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
-                Instantiate(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.
-                   rightParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
-                SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
-               // RightCount.text = text.ToString(); 
+               
+                Vector3 instantateChild = new Vector3(transform.position.x, 0, transform.position.z);
+                for (int j = 0; j < GameManager.instance.rightParent.transform.childCount; j++)
+                {
+                    Vector3 position = GameManager.instance.rightParent.transform.GetChild(j).transform.position;
+                    GameManager.instance.rightParent.transform.GetChild(j).transform.position =
+                        new Vector3(position.x,j+1,position.z);
+                }
+                GameObject coffe = Instantiate(cupPrefab, instantateChild, Quaternion.identity, transform);
+                GameManager.instance.Coffes.Add(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
+                coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.yPosRight, coffe.transform.position.z);
+                GameManager.instance.yPosRight+=1;
+                // RightCount.text = text.ToString(); 
 
-            }          
-            yield return new WaitForSeconds(.05f);
+            }
+            GameManager.instance.BebeleriSirala();
+            yield return new WaitForSeconds(.01f);
         }
-      
+       
     }
     IEnumerator Shake()
     {
@@ -118,16 +151,16 @@ public class RightGate : MonoBehaviour
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
 
     }
-    private void Update()
-    {
-        if (SwerveMovement.instance.hareket == true)
-        {
-            pingPongRight();
-        }
-    }
-    public void pingPongRight()
-    {
-        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
+    //private void Update()
+    //{
+    //    if (SwerveMovement.instance.hareket == true)
+    //    {
+    //        pingPongRight();
+    //    }
+    //}
+    //public void pingPongRight()
+    //{
+    //    transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
 
-    }
+    //}
 }

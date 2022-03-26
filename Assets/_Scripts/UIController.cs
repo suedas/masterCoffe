@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
     #endregion
     public void tapToStart()
     {
-        SwerveMovement.instance.hareket = true;
+        GameManager.instance.hareket = true;
         PlayerMovement.instance.speed = 4;
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
@@ -29,18 +29,18 @@ public class UIController : MonoBehaviour
     }
     public void coffeCountText()
     {
-        int rightText = SwerveMovement.instance.rightParent.childCount;
+        int rightText = GameManager.instance.rightParent.transform.childCount;
         RightCount.text = rightText.ToString();
-        int leftText = SwerveMovement.instance.leftParent.childCount;
+        int leftText = GameManager.instance.leftParent.transform.childCount;
         LeftCount.text = leftText.ToString();
     }
     public void LosePanel()
     {
-        if (SwerveMovement.instance.Coffes.Count == 0 && SwerveMovement.instance.hareket==true)
+        if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket==true)
         {
             
             losePanel.SetActive(true);
-            SwerveMovement.instance.hareket = false;
+            GameManager.instance.hareket = false;
             PlayerMovement.instance.speed = 0;
             RetryClickButton();
             
@@ -54,7 +54,7 @@ public class UIController : MonoBehaviour
     }
     public void Score()
     {
-       int score= SwerveMovement.instance.Coffes.Count;
+       int score= GameManager.instance.Coffes.Count;
         ScoreText.text = score.ToString();
     }
     public void RetryClickButton()
@@ -62,5 +62,10 @@ public class UIController : MonoBehaviour
         //ayný levelý tekrar aç
         Debug.Log("kaybettin");
         //losePanel.SetActive(false);
+    }
+    public void NextLevelClickButton()
+    {
+        //level gönder
+        Debug.Log("level gönder");
     }
 }

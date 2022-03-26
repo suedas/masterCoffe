@@ -10,6 +10,7 @@ public class LeftGate : MonoBehaviour
 {
     public TextMeshProUGUI LeftCount;
     public CinemachineVirtualCamera vcam;
+    public GameObject cupPrefab;
 
     #region Singleton
     public static LeftGate instance;
@@ -75,49 +76,75 @@ public class LeftGate : MonoBehaviour
 
     IEnumerator DestroyMe(int adet)
     {
+
         for (int i = 0; i < adet; i++)
         {
-            int count = SwerveMovement.instance.leftParent.childCount;
-            int text = SwerveMovement.instance.leftParent.childCount + 1;
+            int count = GameManager.instance.leftParent.transform.childCount;
+            int text = GameManager.instance.leftParent.transform.childCount + 1;
 
             if (count > 0)
             {
-                Destroy(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
-                SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
-                count = SwerveMovement.instance.leftParent.childCount;
+                if (GameManager.instance.yPosLeft > .5f) GameManager.instance.yPosLeft-=1;
+                GameObject obj = GameManager.instance.leftParent.transform.GetChild(0).gameObject;
+                obj.transform.parent = null;
+                GameManager.instance.Coffes.Remove(obj);
+                obj.transform.position = new Vector3(0,100,0);
+                for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
+                {
+                    Vector3 position = GameManager.instance.leftParent.transform.GetChild(j).transform.position;
+                    GameManager.instance.leftParent.transform.GetChild(j).transform.position =
+                        new Vector3(position.x, j - 1, position.z);
+                }
+                GameObject obj2 = Instantiate(cupPrefab, new Vector3(-2, GameManager.instance.yPosLeft, 0), Quaternion.identity);
+                obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+                    Destroy(obj2);
+                });
+                     
+                count = GameManager.instance.leftParent.transform.childCount;
                 LeftCount.text = text.ToString(); 
             }
             else
             {
                 //losePanel
             }
-            yield return new WaitForSeconds(.05f);
+            GameManager.instance.BebeleriSirala();
+            yield return new WaitForSeconds(.01f);
         }
+        GameManager.instance.BebeleriSirala();
     }
     IEnumerator InstantiateMe(int sayac)
     {
         for (int i = 0; i < sayac; i++)
         {
-            int number = SwerveMovement.instance.leftParent.childCount;
-            int text = SwerveMovement.instance.leftParent.childCount + 1;
+            int number = GameManager.instance.leftParent.transform.childCount;
+            int text = GameManager.instance.leftParent.transform.childCount + 1;
 
             if (number > 0)
             {
-                Vector3 instantateChild = new Vector3(transform.position.x, SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
-                          leftParent.transform.childCount - 1).transform.position.y + .4f, transform.position.z);
-                Instantiate(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.
-                   leftParent.transform.childCount - 1).gameObject, instantateChild, Quaternion.identity, transform);
-                SwerveMovement.instance.Coffes.Add(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
+              
+                Vector3 instantateChild = new Vector3(transform.position.x, 0, transform.position.z);
+                for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
+                {
+                    Vector3 position = GameManager.instance.leftParent.transform.GetChild(j).transform.position;
+                    GameManager.instance.leftParent.transform.GetChild(j).transform.position =
+                        new Vector3(position.x, j + 1, position.z);
+                }
+                GameObject coffe = Instantiate(cupPrefab, instantateChild, Quaternion.identity, transform);
+                GameManager.instance.Coffes.Add(GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).gameObject);
                 LeftCount.text = text.ToString();
+                coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.yPosLeft, coffe.transform.position.z);
+                GameManager.instance.yPosLeft+=1;
+
 
             }
             else
             {
                 //losePanel
             }
-            yield return new WaitForSeconds(.05f);
+            GameManager.instance.BebeleriSirala();
+            yield return new WaitForSeconds(.01f);
         }
-        
+       
     }
     IEnumerator Shake()
     {
@@ -128,16 +155,16 @@ public class LeftGate : MonoBehaviour
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
 
     }
-    private void Update()
-    {
-        if (SwerveMovement.instance.hareket==true)
-        {
-            pingPongLeft();
-        }
-    }
-    public void pingPongLeft()
-    {
-      transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
+    //private void Update()
+    //{
+    //    if (SwerveMovement.instance.hareket==true)
+    //    {
+    //        pingPongLeft();
+    //    }
+    //}
+    //public void pingPongLeft()
+    //{
+    //  transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
 
-    }
+    //}
 }

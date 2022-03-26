@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             // player durdurulur
             //PlayerMovement.instance.speed = 0;
             GameManager.instance.isContinue = false;
-            SwerveMovement.instance.hareket = false;
+            GameManager.instance.hareket = false;
             //kahvelerin hareketini de durdur
 
         }

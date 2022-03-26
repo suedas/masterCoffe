@@ -48,48 +48,49 @@ public class EndGame : MonoBehaviour
 
     void ServisEt(GameObject other)
     {
-       
-         if (sagdanGit)
+        if (GameManager.instance.Coffes.Count>0)
         {
-            if (SwerveMovement.instance.rightParent.childCount > 0)
+            if (sagdanGit)
             {
-                SwerveMovement.instance.rightParent.GetChild(SwerveMovement.instance.rightParent.childCount - 1).transform.DOJump(other.transform.position , 2, 1, .5f);
-               sagdanGit = false;
-           
-                // SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
+                if (GameManager.instance.rightParent.transform.childCount > 0)
+                {
+                    GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.DOJump(other.transform.position, 2, 1, .5f);
+                    sagdanGit = false;
+                    GameManager.instance.Coffes.Remove(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
 
-                SwerveMovement.instance.rightParent.GetChild(SwerveMovement.instance.rightParent.childCount - 1).transform.parent = null;
+                    GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.parent = null;
+                }
+                else
+                {
+
+                    sagdanGit = false;
+                    ServisEt(other);
+                }
+
             }
-            else
+            else if (!sagdanGit)
             {
-               
-                sagdanGit = false;
-                ServisEt(other);
-            }
+                if (GameManager.instance.leftParent.transform.childCount > 0)
+                {
+                    GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.DOJump(other.transform.position, 2, 1, .5f);
+                    sagdanGit = true;
+                    GameManager.instance.Coffes.Remove(GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).gameObject);
+                    GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.parent = null;
 
+                }
+                else
+                {
+                    sagdanGit = true;
+                    ServisEt(other);
+                }
+            }
         }
-        else if (!sagdanGit)
+        else
         {
-            if (SwerveMovement.instance.leftParent.childCount > 0)
-            {
-                SwerveMovement.instance.leftParent.GetChild(SwerveMovement.instance.leftParent.childCount - 1).transform.DOJump(other.transform.position, 2, 1, .5f);
-                sagdanGit = true;
-                //SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
-                SwerveMovement.instance.leftParent.GetChild(SwerveMovement.instance.leftParent.childCount - 1).transform.parent = null;
-
-            }
-            else
-            {
-               
-                sagdanGit = true;
-                ServisEt(other);
-
-            }
-           
-
-
+            StopCoroutine(IncreaseTime());
+            UIController.instance.WinPanel();
         }
-     
+        
     }
 
    public IEnumerator IncreaseTime()
