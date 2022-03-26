@@ -169,10 +169,7 @@ public class SwerveMovement : MonoBehaviour
             }
         }
     }
-    public void ClickPlayBtn()
-    {
-        UIController.instance.tapToStart();
-    }
+  
 
 
 

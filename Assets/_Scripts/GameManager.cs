@@ -20,14 +20,23 @@ public class GameManager : MonoBehaviour
 	Vector3 mousePosition, tempMousePosition;
 	public bool isContinue;
 	public List<GameObject> Coffes = new List<GameObject>();
+	public Transform coffePrefab;
+
 
 	private void Start()
 	{
-		hareket = true;
+		hareket = false;
 		DOTween.Init();
 		yPosLeft = leftParent.transform.childCount;
 		yPosRight = rightParent.transform.childCount;
 		isContinue = true;
+        //LevelController.instance.instantiateCoffe();
+        for (int i = 0; i < 4; i++)
+        {
+            Instantiate(coffePrefab, new Vector3(GameManager.instance.leftParent.transform.position.x, i, GameManager.instance.leftParent.transform.position.z), Quaternion.identity, GameManager.instance.leftParent.transform);
+            GameManager.instance.yPosLeft += 1;
+
+        }
         for (int i = 0; i < leftParent.transform.childCount; i++)
         {
 			Coffes.Add(leftParent.transform.GetChild(i).gameObject);
@@ -59,6 +68,7 @@ public class GameManager : MonoBehaviour
 				isContinue = false;
 				StartCoroutine(DelayAndContinue());
 				isRight = true;
+
 				Aktar();
 			}
 			else if (mousePosition.x - tempMousePosition.x < 0 && isContinue) // sola
@@ -78,24 +88,28 @@ public class GameManager : MonoBehaviour
 	}
 
 
-	void Aktar()
-	{
-		if (isRight) // saða sürükleniyorsa
-		{
-			if (leftParent.transform.childCount > 0)
+	public void Aktar()
+    {
+        if (hareket==true)
+        {
+			if (isRight) // saða sürükleniyorsa
 			{
-				StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
-				leftParent.transform.GetChild(leftParent.transform.childCount - 1).parent = rightParent.transform;
+				if (leftParent.transform.childCount > 0)
+				{
+					StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
+					leftParent.transform.GetChild(leftParent.transform.childCount - 1).parent = rightParent.transform;
+				}
+			}
+			else if (!isRight) // sola sürükleniyorsa
+			{
+				if (rightParent.transform.childCount > 0)
+				{
+					StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
+					rightParent.transform.GetChild(rightParent.transform.childCount - 1).parent = leftParent.transform;
+				}
 			}
 		}
-		else if (!isRight) // sola sürükleniyorsa
-		{
-			if (rightParent.transform.childCount > 0)
-			{
-				StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
-				rightParent.transform.GetChild(rightParent.transform.childCount - 1).parent = leftParent.transform;
-			}
-		}
+		
 	}
 
 	IEnumerator SagaGit(GameObject obj)
@@ -121,7 +135,7 @@ public class GameManager : MonoBehaviour
 		
 		obj.transform.rotation = Quaternion.Euler(Vector3.zero);
 		Scale(obj);
-		obj.transform.position = new Vector3(2, yPosRight, obj.transform.position.z);
+
 		yPosRight += 1;
 		yPosLeft -= 1;
 		BebeleriSirala();

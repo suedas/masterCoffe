@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6808808945443994853}
   m_Layer: 0
   m_Name: Coffe
-  m_TagString: sol
+  m_TagString: coffe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

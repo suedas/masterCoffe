@@ -48,7 +48,11 @@ public class RightGate : MonoBehaviour
             //vcam.transform.DOShakeRotation(0.2f, 30, fadeOut: true);
             other.GetComponent<Collider>().enabled = false;        
             StartCoroutine(DestroyMe(3));
-            StartCoroutine(Shake());
+            if (GameManager.instance.rightParent.transform.childCount>0)
+            {
+                StartCoroutine(LeftGate.instance.Shake());
+
+            }
             //Debug.Log("engelll");
         }
         #endregion
@@ -84,7 +88,9 @@ public class RightGate : MonoBehaviour
             {
                 if(GameManager.instance.yPosRight > .5f)GameManager.instance.yPosRight-=1;
                 GameObject obj = GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount  - 1).gameObject;
+                Vector3 obj2Pos = obj.transform.position;
                 obj.transform.parent = null;
+                StartCoroutine(DestroySahteObje(obj));
                 GameManager.instance.Coffes.Remove(obj);
                 obj.transform.position = new Vector3(0, 100, 0);
                 for (int j = 0; j < GameManager.instance.rightParent.transform.childCount; j++)
@@ -93,7 +99,7 @@ public class RightGate : MonoBehaviour
                     GameManager.instance.rightParent.transform.GetChild(j).transform.position =
                         new Vector3(position.x, j - 1, position.z);
                 }
-                GameObject obj2 = Instantiate(cupPrefab, new Vector3(2,GameManager.instance.yPosRight,0), Quaternion.identity);
+                GameObject obj2 = Instantiate(cupPrefab, obj2Pos, Quaternion.identity);
                 obj2.transform.DOMoveY(50, 2).OnComplete(() => {
                     Destroy(obj2);
                 });
@@ -142,15 +148,22 @@ public class RightGate : MonoBehaviour
         }
        
     }
-    IEnumerator Shake()
+
+    public IEnumerator DestroySahteObje(GameObject obj)
     {
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
-        yield return new WaitForSeconds(0.5f);
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+        yield return new WaitForSeconds(2);
+        Destroy(obj);
 
     }
+    //IEnumerator Shake()
+    //{
+    //    vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
+    //    vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
+    //    yield return new WaitForSeconds(0.5f);
+    //    vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+    //    vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+
+    //}
     //private void Update()
     //{
     //    if (SwerveMovement.instance.hareket == true)

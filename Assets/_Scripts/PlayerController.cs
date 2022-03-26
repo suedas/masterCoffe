@@ -35,8 +35,19 @@ public class PlayerController : MonoBehaviour
             //PlayerMovement.instance.speed = 0;
             GameManager.instance.isContinue = false;
             GameManager.instance.hareket = false;
+            GameManager.instance.yPosLeft = 0;
+            GameManager.instance.yPosRight = 0;
+            StartCoroutine(EndGame.instance.IncreaseTime());
             //kahvelerin hareketini de durdur
+            UIController.instance.LeftCount.enabled = false;
+            UIController.instance.RightCount.enabled = false;
+           
 
+        }
+        else if (other.CompareTag("customer"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+           EndGame.instance.ServisEt(other.gameObject);
         }
     }
 }

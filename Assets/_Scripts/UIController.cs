@@ -21,7 +21,9 @@ public class UIController : MonoBehaviour
     public void tapToStart()
     {
         GameManager.instance.hareket = true;
+        GameManager.instance.isContinue = true;
         PlayerMovement.instance.speed = 4;
+
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
         Debug.Log("butona basýldý ");
@@ -61,11 +63,17 @@ public class UIController : MonoBehaviour
     {
         //ayný levelý tekrar aç
         Debug.Log("kaybettin");
+        LevelController.instance.RestartLevelEvents();
         //losePanel.SetActive(false);
     }
     public void NextLevelClickButton()
     {
         //level gönder
         Debug.Log("level gönder");
+        LevelController.instance.NextLevelEvents();
+    }
+    public void ClickPlayBtn()
+    {
+        tapToStart();
     }
 }

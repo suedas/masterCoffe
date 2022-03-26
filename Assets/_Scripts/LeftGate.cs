@@ -49,7 +49,11 @@ public class LeftGate : MonoBehaviour
         else if (other.gameObject.CompareTag("obstacle"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(Shake());
+            if (GameManager.instance.leftParent.transform.childCount>0)
+            {
+                StartCoroutine(Shake());
+
+            }
             StartCoroutine(DestroyMe(3));
         }
         #endregion
@@ -86,7 +90,9 @@ public class LeftGate : MonoBehaviour
             {
                 if (GameManager.instance.yPosLeft > .5f) GameManager.instance.yPosLeft-=1;
                 GameObject obj = GameManager.instance.leftParent.transform.GetChild(0).gameObject;
+                Vector3 obj2Pos = obj.transform.position;
                 obj.transform.parent = null;
+                StartCoroutine(DestroySahteObje(obj));
                 GameManager.instance.Coffes.Remove(obj);
                 obj.transform.position = new Vector3(0,100,0);
                 for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
@@ -95,7 +101,7 @@ public class LeftGate : MonoBehaviour
                     GameManager.instance.leftParent.transform.GetChild(j).transform.position =
                         new Vector3(position.x, j - 1, position.z);
                 }
-                GameObject obj2 = Instantiate(cupPrefab, new Vector3(-2, GameManager.instance.yPosLeft, 0), Quaternion.identity);
+                GameObject obj2 = Instantiate(cupPrefab, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
                 obj2.transform.DOMoveY(50, 2).OnComplete(() => {
                     Destroy(obj2);
                 });
@@ -112,7 +118,7 @@ public class LeftGate : MonoBehaviour
         }
         GameManager.instance.BebeleriSirala();
     }
-    IEnumerator InstantiateMe(int sayac)
+   public IEnumerator InstantiateMe(int sayac)
     {
         for (int i = 0; i < sayac; i++)
         {
@@ -120,8 +126,7 @@ public class LeftGate : MonoBehaviour
             int text = GameManager.instance.leftParent.transform.childCount + 1;
 
             if (number > 0)
-            {
-              
+            {             
                 Vector3 instantateChild = new Vector3(transform.position.x, 0, transform.position.z);
                 for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
                 {
@@ -137,22 +142,24 @@ public class LeftGate : MonoBehaviour
 
 
             }
-            else
-            {
-                //losePanel
-            }
             GameManager.instance.BebeleriSirala();
             yield return new WaitForSeconds(.01f);
         }
        
     }
-    IEnumerator Shake()
-    {
+     public IEnumerator Shake()
+     {
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1;
         yield return new WaitForSeconds(0.5f);
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
+
+     }
+    public IEnumerator DestroySahteObje(GameObject obj)
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(obj);
 
     }
     //private void Update()

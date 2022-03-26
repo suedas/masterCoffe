@@ -20,33 +20,8 @@ public class EndGame : MonoBehaviour
         else Destroy(this);
     }
     #endregion
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("finish"))
-        {
-            UIController.instance.LeftCount.enabled = false;
-            UIController.instance.RightCount.enabled = false;
-
-            //StartCoroutine(Stop());
-      
-            StartCoroutine(IncreaseTime());
-            //if (SwerveMovement.instance.leftParent.childCount==0&& SwerveMovement.instance.rightParent.childCount==0)
-            //{
-            //    StopCoroutine(IncreaseTime());
-            //    UIController.instance.WinPanel();
-
-            //}
-
-        }
-        else if (other.CompareTag("customer"))
-        {
-            other.GetComponent<Collider>().enabled = false;
-            ServisEt(other.gameObject);
-        }
-    }
-
-    void ServisEt(GameObject other)
+   
+    public void ServisEt(GameObject other)
     {
         if (GameManager.instance.Coffes.Count>0)
         {
@@ -57,8 +32,8 @@ public class EndGame : MonoBehaviour
                     GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.DOJump(other.transform.position, 2, 1, .5f);
                     sagdanGit = false;
                     GameManager.instance.Coffes.Remove(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
-
                     GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.parent = null;
+                    
                 }
                 else
                 {
@@ -76,7 +51,7 @@ public class EndGame : MonoBehaviour
                     sagdanGit = true;
                     GameManager.instance.Coffes.Remove(GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).gameObject);
                     GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.parent = null;
-
+                    
                 }
                 else
                 {
@@ -88,6 +63,8 @@ public class EndGame : MonoBehaviour
         else
         {
             StopCoroutine(IncreaseTime());
+            PlayerMovement.instance.speed = 0;
+
             UIController.instance.WinPanel();
         }
         
@@ -98,7 +75,7 @@ public class EndGame : MonoBehaviour
         PlayerMovement.instance.speed = 0;
         yield return new WaitForSeconds(3);
         ///sag sol gecis dursun!!!
-        while (SwerveMovement.instance.Coffes.Count > 0)
+        while (GameManager.instance.Coffes.Count > 0)
         {
             if (PlayerMovement.instance.speed <= 10)
             {
@@ -112,6 +89,7 @@ public class EndGame : MonoBehaviour
 
 
     }
+
 
     //IEnumerator Stop()
     //{
