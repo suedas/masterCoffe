@@ -11,7 +11,15 @@ public class EndGame : MonoBehaviour
     //Vector3 goLeft;
     //Vector3 goRight;
     //int listCount = SwerveMovement.instance.Coffes.Count;
-
+    #region Singleton
+    public static EndGame instance;
+    //public TextMeshProUGUI RightCount;
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(this);
+    }
+    #endregion
     private void OnTriggerEnter(Collider other)
     {
 
@@ -21,8 +29,14 @@ public class EndGame : MonoBehaviour
             UIController.instance.RightCount.enabled = false;
 
             //StartCoroutine(Stop());
+      
             StartCoroutine(IncreaseTime());
+            //if (SwerveMovement.instance.leftParent.childCount==0&& SwerveMovement.instance.rightParent.childCount==0)
+            //{
+            //    StopCoroutine(IncreaseTime());
+            //    UIController.instance.WinPanel();
 
+            //}
 
         }
         else if (other.CompareTag("customer"))
@@ -34,20 +48,21 @@ public class EndGame : MonoBehaviour
 
     void ServisEt(GameObject other)
     {
-        if (sagdanGit)
+       
+         if (sagdanGit)
         {
             if (SwerveMovement.instance.rightParent.childCount > 0)
             {
                 SwerveMovement.instance.rightParent.GetChild(SwerveMovement.instance.rightParent.childCount - 1).transform.DOJump(other.transform.position , 2, 1, .5f);
-                sagdanGit = false;
+               sagdanGit = false;
+           
+                // SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.rightParent.transform.GetChild(SwerveMovement.instance.rightParent.transform.childCount - 1).gameObject);
+
                 SwerveMovement.instance.rightParent.GetChild(SwerveMovement.instance.rightParent.childCount - 1).transform.parent = null;
             }
             else
             {
-                if (SwerveMovement.instance.leftParent.childCount == 0 && SwerveMovement.instance.rightParent.childCount == 0)
-                {
-                    UIController.instance.WinPanel();
-                }
+               
                 sagdanGit = false;
                 ServisEt(other);
             }
@@ -59,35 +74,42 @@ public class EndGame : MonoBehaviour
             {
                 SwerveMovement.instance.leftParent.GetChild(SwerveMovement.instance.leftParent.childCount - 1).transform.DOJump(other.transform.position, 2, 1, .5f);
                 sagdanGit = true;
+                //SwerveMovement.instance.Coffes.Remove(SwerveMovement.instance.leftParent.transform.GetChild(SwerveMovement.instance.leftParent.transform.childCount - 1).gameObject);
                 SwerveMovement.instance.leftParent.GetChild(SwerveMovement.instance.leftParent.childCount - 1).transform.parent = null;
 
             }
             else
             {
-                if (SwerveMovement.instance.leftParent.childCount == 0 && SwerveMovement.instance.rightParent.childCount == 0)
-                {
-                    UIController.instance.WinPanel();
-                }
+               
                 sagdanGit = true;
                 ServisEt(other);
 
             }
+           
 
 
         }
-
+     
     }
 
-    IEnumerator IncreaseTime()
+   public IEnumerator IncreaseTime()
     {
         PlayerMovement.instance.speed = 0;
         yield return new WaitForSeconds(3);
         ///sag sol gecis dursun!!!
         while (SwerveMovement.instance.Coffes.Count > 0)
         {
-            if (PlayerMovement.instance.speed <= 10) PlayerMovement.instance.speed += 0.05f;
+            if (PlayerMovement.instance.speed <= 10)
+            {
+                PlayerMovement.instance.speed += 0.05f;
+
+            }
             yield return new WaitForSeconds(.05f);
         }
+
+
+
+
     }
 
     //IEnumerator Stop()

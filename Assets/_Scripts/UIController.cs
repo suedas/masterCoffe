@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     {
         SwerveMovement.instance.hareket = true;
         PlayerMovement.instance.speed = 4;
-        //PlayButton.gameObject.SetActive(false);
+        // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
         Debug.Log("butona basýldý ");
 
@@ -36,16 +36,20 @@ public class UIController : MonoBehaviour
     }
     public void LosePanel()
     {
-        if (SwerveMovement.instance.Coffes.Count == 0)
+        if (SwerveMovement.instance.Coffes.Count == 0 && SwerveMovement.instance.hareket==true)
         {
+            
             losePanel.SetActive(true);
+            SwerveMovement.instance.hareket = false;
             PlayerMovement.instance.speed = 0;
+            RetryClickButton();
+            
         }
     }
     public void WinPanel()
     {
         winPanel.SetActive(true);
-        PlayerMovement.instance.speed = 0;
+       // PlayerMovement.instance.speed = 0;
 
     }
     public void Score()
@@ -53,5 +57,10 @@ public class UIController : MonoBehaviour
        int score= SwerveMovement.instance.Coffes.Count;
         ScoreText.text = score.ToString();
     }
-
+    public void RetryClickButton()
+    {
+        //ayný levelý tekrar aç
+        Debug.Log("kaybettin");
+        //losePanel.SetActive(false);
+    }
 }
