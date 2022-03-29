@@ -7,7 +7,8 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     public GameObject tapToStartPanel, losePanel, winPanel;
-    public TextMeshProUGUI RightCount, LeftCount,ScoreText;
+    public TextMeshProUGUI RightCount, LeftCount,ScoreText,LevelText;
+    public Animator anim;
     //public GameObject leftHand, rightHand;
     #region Singleton
     public static UIController instance;
@@ -71,5 +72,10 @@ public class UIController : MonoBehaviour
     public void ClickPlayBtn()
     {
         tapToStart();
+    }
+    public void clickbuton()
+    {
+       
+        anim.SetBool("isTrue",true);
     }
 }

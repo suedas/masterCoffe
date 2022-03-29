@@ -40,19 +40,27 @@ public class LevelController : MonoBehaviour
 		if (totalLevelNo > LevelPrefabs.Count)
 		{
 			currentLevelNo = Random.Range(1, LevelPrefabs.Count + 1);
+			UIController.instance.LevelText.text = currentLevelNo.ToString();
+
 		}
 		else
 		{
 			currentLevelNo = totalLevelNo;
+			UIController.instance.LevelText.text = currentLevelNo.ToString();
+
 		}
 		if (currentLevelObj == null)
 		{
 			currentLevelObj = Instantiate(LevelPrefabs[currentLevelNo - 1], Vector3.zero, Quaternion.identity);
+			UIController.instance.LevelText.text = currentLevelNo.ToString();
+
 		}
 		else
 		{
 			Destroy(currentLevelObj);
 			currentLevelObj = Instantiate(LevelPrefabs[currentLevelNo - 1], Vector3.zero, Quaternion.identity);
+			UIController.instance.LevelText.text = currentLevelNo.ToString();
+
 		}
 	}
 
@@ -67,7 +75,6 @@ public class LevelController : MonoBehaviour
 		UIController.instance.LeftCount.enabled = true;
 		UIController.instance.RightCount.enabled = true;
 		DestroyCoffe();
-
 		instantiateCoffe();
 		Debug.Log(GameManager.instance.Coffes.Count);
 		//LeftGate.instance.InstantiateMe(4);
@@ -101,11 +108,18 @@ public class LevelController : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
 			Instantiate(coffePrefab,new Vector3(GameManager.instance.leftParent.transform.position.x, i, GameManager.instance.leftParent.transform.position.z),Quaternion.identity,GameManager.instance.leftParent.transform);
-			GameManager.instance.Coffes.Add(coffePrefab.gameObject);
+			//GameManager.instance.Coffes.Add(coffePrefab.gameObject);
 			GameManager.instance.yPosLeft += 1;
 
 		}
-
+		for (int i = 0; i < GameManager.instance.leftParent.transform.childCount; i++)
+		{
+			GameManager.instance.Coffes.Add(GameManager.instance.leftParent.transform.GetChild(i).gameObject);
+		}
+		for (int i = 0; i < GameManager.instance.rightParent.transform.childCount; i++)
+		{
+			GameManager.instance.Coffes.Add(GameManager.instance.rightParent.transform.GetChild(i).gameObject);
+		}
 
 	}
 }
