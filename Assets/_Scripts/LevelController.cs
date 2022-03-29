@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour
 	public List<GameObject> LevelPrefabs = new();
 	public Transform coffePrefab;
 	public GameObject[] coffe;
-
+	public int öncekicoin;
 	public int currentLevelNo, totalLevelNo;
 	// ui kýsmýna totallevelno yazdýrýlýyor.. currentlevelno sadece level objelerinin instantiate edilmesini kontrol ediyor..
 
@@ -77,6 +77,8 @@ public class LevelController : MonoBehaviour
 		DestroyCoffe();
 		instantiateCoffe();
 		Debug.Log(GameManager.instance.Coffes.Count);
+		int öncekicoin =System.Int32.Parse(UIController.instance.ScoreText.text); //þunu baþka yerde çekeceksin
+
 		//LeftGate.instance.InstantiateMe(4);
 	}
 	public void DestroyCoffe()

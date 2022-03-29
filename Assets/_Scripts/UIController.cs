@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 
 public class UIController : MonoBehaviour
@@ -75,7 +76,20 @@ public class UIController : MonoBehaviour
     }
     public void clickbuton()
     {
-       
         anim.SetBool("isTrue",true);
+        StartCoroutine(coin());
+    }
+    IEnumerator coin()
+    {
+     
+        for (int i = 0; i < PlayerController.instance.coin; i++)
+        {
+            LevelController.instance.öncekicoin += i;
+
+            yield return new WaitForSeconds(.2f);
+        }
+        UIController.instance.ScoreText.text = LevelController.instance.öncekicoin.ToString();
+
+
     }
 }

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     float time;
+    public int coin;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("collectible"))
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
             //kahvelerin hareketini de durdur
             UIController.instance.LeftCount.enabled = false;
             UIController.instance.RightCount.enabled = false;
-            int coin = GameManager.instance.Coffes.Count;
+            coin = GameManager.instance.Coffes.Count;
             Debug.Log("btis cizgisindeki count" + " " + GameManager.instance.Coffes.Count);
             Debug.Log("left parent" + "" + GameManager.instance.leftParent.transform.childCount);
             Debug.Log("right parent" + "" + GameManager.instance.rightParent.transform.childCount);
