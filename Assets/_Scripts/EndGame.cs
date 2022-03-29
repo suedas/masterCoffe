@@ -41,7 +41,7 @@ public class EndGame : MonoBehaviour
                     sagdanGit = false;
                     ServisEt(other);
                 }
-
+                Debug.Log("saðdan git" + GameManager.instance.Coffes.Count);
             }
             else if (!sagdanGit)
             {
@@ -58,6 +58,8 @@ public class EndGame : MonoBehaviour
                     sagdanGit = true;
                     ServisEt(other);
                 }
+                Debug.Log("soldan git" + GameManager.instance.Coffes.Count);
+
             }
         }
         else

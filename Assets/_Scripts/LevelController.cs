@@ -66,14 +66,20 @@ public class LevelController : MonoBehaviour
 		UIController.instance.tapToStartPanel.SetActive(true);
 		UIController.instance.LeftCount.enabled = true;
 		UIController.instance.RightCount.enabled = true;
-		coffe= GameObject.FindGameObjectsWithTag("coffe");
-        for (int i = 0; i < coffe.Length; i++)
-        {
-			Destroy(coffe[i]);			
-        }
+		DestroyCoffe();
+
 		instantiateCoffe();
 		Debug.Log(GameManager.instance.Coffes.Count);
 		//LeftGate.instance.InstantiateMe(4);
+	}
+	public void DestroyCoffe()
+    {
+		coffe = GameObject.FindGameObjectsWithTag("coffe");
+		for (int i = 0; i < coffe.Length; i++)
+		{
+			Destroy(coffe[i]);
+		}
+
 	}
 
 	public void RestartLevelEvents()
@@ -85,6 +91,7 @@ public class LevelController : MonoBehaviour
 		UIController.instance.tapToStartPanel.SetActive(true);
 		UIController.instance.LeftCount.enabled = true;
 		UIController.instance.RightCount.enabled = true;
+		instantiateCoffe();
 
 
 	}

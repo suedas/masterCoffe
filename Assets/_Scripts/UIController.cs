@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
 
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
-        Debug.Log("butona basýldý ");
+        Debug.Log("baþlarken coffe sayýsý "+" "+ GameManager.instance.Coffes.Count);
 
     }
     public void coffeCountText()
@@ -42,9 +42,11 @@ public class UIController : MonoBehaviour
         {
             
             losePanel.SetActive(true);
+            LeftCount.enabled = false;
+            RightCount.enabled = false;
             GameManager.instance.hareket = false;
             PlayerMovement.instance.speed = 0;
-            RetryClickButton();
+           // RetryClickButton();
             
         }
     }
@@ -59,13 +61,7 @@ public class UIController : MonoBehaviour
        int score= GameManager.instance.Coffes.Count;
         ScoreText.text = score.ToString();
     }
-    public void RetryClickButton()
-    {
-        //ayný levelý tekrar aç
-        Debug.Log("kaybettin");
-        LevelController.instance.RestartLevelEvents();
-        //losePanel.SetActive(false);
-    }
+   
     public void NextLevelClickButton()
     {
         //level gönder
