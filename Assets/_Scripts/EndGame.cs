@@ -7,7 +7,7 @@ public class EndGame : MonoBehaviour
 {
     //public Rigidbody leftHand, rightHand;
     bool sagdanGit;
-
+   
     //Vector3 goLeft;
     //Vector3 goRight;
     //int listCount = SwerveMovement.instance.Coffes.Count;
@@ -33,7 +33,7 @@ public class EndGame : MonoBehaviour
                     sagdanGit = false;
                     GameManager.instance.Coffes.Remove(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
                     GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.parent = null;
-                    
+                   
                 }
                 else
                 {

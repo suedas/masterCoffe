@@ -37,7 +37,13 @@ public class RightGate : MonoBehaviour
             StartCoroutine(DestroyMe(10));
 
         }
-        else if (other.gameObject.CompareTag("bölü2"))
+        else if (other.gameObject.CompareTag("-6"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(DestroyMe(6));
+
+        }
+        else if (other.gameObject.CompareTag("bolu2"))
         {
             int child = SwerveMovement.instance.rightParent.childCount / 2;
             other.GetComponent<Collider>().enabled = false;
@@ -74,7 +80,37 @@ public class RightGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(InstantiateMe(child));
         }
+        else if (other.gameObject.CompareTag("+6"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(InstantiateMe(6));
+        }
+        else if (other.gameObject.CompareTag("x2"))
+        {
+            int child = SwerveMovement.instance.rightParent.childCount * 2;
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(InstantiateMe(child));
+        }
+        else if (other.gameObject.CompareTag("+7"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(InstantiateMe(7));
+        }
+        else if (other.gameObject.CompareTag("+14"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(InstantiateMe(14));
+        }
         #endregion
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("-2") || other.gameObject.CompareTag("bolu2") || other.gameObject.CompareTag("x3") ||
+            other.gameObject.CompareTag("-10") || other.gameObject.CompareTag("+8") || other.gameObject.CompareTag("+12"))
+        {
+           // GameManager.instance.BebeleriDiz();
+        }
     }
 
     IEnumerator DestroyMe(int adet)
@@ -138,7 +174,7 @@ public class RightGate : MonoBehaviour
                 }
                 GameObject coffe = Instantiate(cupPrefab, instantateChild, Quaternion.identity, transform);
                 GameManager.instance.Coffes.Add(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
-                coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.yPosRight, coffe.transform.position.z);
+                coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).position.y+1, coffe.transform.position.z);
                 GameManager.instance.yPosRight+=1;
                 // RightCount.text = text.ToString(); 
 

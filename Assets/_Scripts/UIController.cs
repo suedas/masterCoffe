@@ -7,8 +7,9 @@ using System;
 
 public class UIController : MonoBehaviour
 {
-    public GameObject tapToStartPanel, losePanel, winPanel;
+    public GameObject tapToStartPanel, losePanel, winPanel,rightImage,leftImage;
     public TextMeshProUGUI RightCount, LeftCount,ScoreText,LevelText;
+   
     public Animator anim;
     //public GameObject leftHand, rightHand;
     #region Singleton
@@ -25,10 +26,11 @@ public class UIController : MonoBehaviour
         GameManager.instance.hareket = true;
         GameManager.instance.isContinue = true;
         PlayerMovement.instance.speed = 4;
-
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
         Debug.Log("baþlarken coffe sayýsý "+" "+ GameManager.instance.Coffes.Count);
+        LeftCount.enabled = true;
+        RightCount.enabled =true;
 
     }
     public void coffeCountText()
@@ -40,8 +42,8 @@ public class UIController : MonoBehaviour
     }
     public void LosePanel()
     {
-        if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket==true)
-        {
+       // if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket==true)
+        //{
             
             losePanel.SetActive(true);
             LeftCount.enabled = false;
@@ -50,7 +52,7 @@ public class UIController : MonoBehaviour
             PlayerMovement.instance.speed = 0;
            // RetryClickButton();
             
-        }
+       // }
     }
     public void WinPanel()
     {
@@ -77,19 +79,19 @@ public class UIController : MonoBehaviour
     public void clickbuton()
     {
         anim.SetBool("isTrue",true);
-        StartCoroutine(coin());
+        //StartCoroutine(coin());
     }
-    IEnumerator coin()
-    {
+    //IEnumerator coin()
+    //{
      
-        for (int i = 0; i < PlayerController.instance.coin; i++)
-        {
-            LevelController.instance.öncekicoin += i;
+    //    for (int i = 0; i < PlayerController.instance.coin; i++)
+    //    {
+    //        LevelController.instance.öncekicoin += i;
 
-            yield return new WaitForSeconds(.2f);
-        }
-        UIController.instance.ScoreText.text = LevelController.instance.öncekicoin.ToString();
+    //        yield return new WaitForSeconds(.2f);
+    //    }
+    //    UIController.instance.ScoreText.text = LevelController.instance.öncekicoin.ToString();
 
 
-    }
+    //}
 }

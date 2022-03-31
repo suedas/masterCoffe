@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     #endregion
     float time;
     public int coin;
+    public GameObject para;
+    public Transform paraTarget;
+    public int lastMoney;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("collectible"))
@@ -40,21 +44,27 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.yPosRight = 0;
             StartCoroutine(EndGame.instance.IncreaseTime());
             //kahvelerin hareketini de durdur
-            UIController.instance.LeftCount.enabled = false;
-            UIController.instance.RightCount.enabled = false;
-            coin = GameManager.instance.Coffes.Count;
-            Debug.Log("btis cizgisindeki count" + " " + GameManager.instance.Coffes.Count);
-            Debug.Log("left parent" + "" + GameManager.instance.leftParent.transform.childCount);
-            Debug.Log("right parent" + "" + GameManager.instance.rightParent.transform.childCount);
+            UIController.instance.leftImage.SetActive(false);
+            UIController.instance.rightImage.SetActive(false);
 
-          
+            coin = GameManager.instance.Coffes.Count;
+            lastMoney = System.Int32.Parse(UIController.instance.ScoreText.text);
 
 
         }
         else if (other.CompareTag("customer"))
         {
             other.GetComponent<Collider>().enabled = false;
-           EndGame.instance.ServisEt(other.gameObject);
+            EndGame.instance.ServisEt(other.gameObject);
+            GameObject obj = Instantiate(para, other.transform.position, Quaternion.identity);
+            obj.transform.DOMove(paraTarget.transform.position, .5f);
+            obj.transform.DOScale(2f, .48f).OnComplete(() => 
+            {
+                lastMoney += 2;
+                UIController.instance.ScoreText.text = lastMoney.ToString();
+                Destroy(obj);
+            });
+
         }
     }
 }

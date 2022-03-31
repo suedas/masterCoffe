@@ -72,12 +72,12 @@ public class LevelController : MonoBehaviour
 		UIController.instance.winPanel.SetActive(false);
 		GameObject.Find("PlayerMain").transform.position = Vector3.zero;	
 		UIController.instance.tapToStartPanel.SetActive(true);
-		UIController.instance.LeftCount.enabled = true;
-		UIController.instance.RightCount.enabled = true;
+		UIController.instance.leftImage.SetActive(true);
+		UIController.instance.rightImage.SetActive(true);
 		DestroyCoffe();
 		instantiateCoffe();
 		Debug.Log(GameManager.instance.Coffes.Count);
-		int öncekicoin =System.Int32.Parse(UIController.instance.ScoreText.text); //þunu baþka yerde çekeceksin
+
 
 		//LeftGate.instance.InstantiateMe(4);
 	}
@@ -98,8 +98,8 @@ public class LevelController : MonoBehaviour
 		UIController.instance.losePanel.SetActive(false);
 		GameObject.Find("PlayerMain").transform.position = Vector3.zero;
 		UIController.instance.tapToStartPanel.SetActive(true);
-		UIController.instance.LeftCount.enabled = true;
-		UIController.instance.RightCount.enabled = true;
+		UIController.instance.leftImage.SetActive(true);
+		UIController.instance.rightImage.SetActive(true);
 		instantiateCoffe();
 
 

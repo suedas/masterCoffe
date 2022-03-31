@@ -15,10 +15,17 @@ TagManager:
   - x3
   - -10
   - +8
-  - "b\xF6l\xFC2"
   - +12
   - customer
   - coffe
+  - coin
+  - bolu2
+  - "b\xF6l\xFC2"
+  - +6
+  - x2
+  - +7
+  - -6
+  - +14
   layers:
   - Default
   - TransparentFX

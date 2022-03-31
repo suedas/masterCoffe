@@ -30,10 +30,12 @@ public class GameManager : MonoBehaviour
 		yPosLeft = leftParent.transform.childCount;
 		yPosRight = rightParent.transform.childCount;
 		isContinue = true;
+		
+
         //LevelController.instance.instantiateCoffe();
         for (int i = 0; i < 4; i++)
         {
-            Instantiate(coffePrefab, new Vector3(GameManager.instance.leftParent.transform.position.x, i, GameManager.instance.leftParent.transform.position.z), Quaternion.identity, GameManager.instance.leftParent.transform);
+            Instantiate(coffePrefab, new Vector3(leftParent.transform.position.x, i, leftParent.transform.position.z), Quaternion.identity, leftParent.transform);
             GameManager.instance.yPosLeft += 1;
 
         }
@@ -45,11 +47,19 @@ public class GameManager : MonoBehaviour
 		{
 			Coffes.Add(rightParent.transform.GetChild(i).gameObject);
 		}
-	}
+        UIController.instance.LeftCount.text = leftParent.transform.childCount.ToString();
+        UIController.instance.RightCount.text = rightParent.transform.childCount.ToString();
+    }
 
 	private void Update()
 	{
-        if (hareket)
+		UIController.instance.coffeCountText();
+        if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket == true)
+        {
+			UIController.instance.LosePanel();
+        }
+
+		if (hareket)
         {
             leftParent.transform.position = new Vector3(leftParent.transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), leftParent.transform.position.z);
             rightParent.transform.position = new Vector3(rightParent.transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), rightParent.transform.position.z);
@@ -96,7 +106,9 @@ public class GameManager : MonoBehaviour
 			{
 				if (leftParent.transform.childCount > 0)
 				{
-					StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
+					//StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
+					float y = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position.y;
+					StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject,y));
 					leftParent.transform.GetChild(leftParent.transform.childCount - 1).parent = rightParent.transform;
 				}
 			}
@@ -104,7 +116,9 @@ public class GameManager : MonoBehaviour
 			{
 				if (rightParent.transform.childCount > 0)
 				{
-					StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
+					//StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
+					float y = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position.y;
+					StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject,y));
 					rightParent.transform.GetChild(rightParent.transform.childCount - 1).parent = leftParent.transform;
 				}
 			}
@@ -112,10 +126,11 @@ public class GameManager : MonoBehaviour
 		
 	}
 
-	IEnumerator SagaGit(GameObject obj)
+	IEnumerator SagaGit(GameObject obj, float yukseklik)
 	{
 		Vector3 position;
 		float sayac = 0;
+		//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
 		if (rightParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, rightParent.transform.childCount, 0);
@@ -132,19 +147,20 @@ public class GameManager : MonoBehaviour
 			obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
 			yield return new WaitForSeconds(.01f);
 		}
-		
+		obj.transform.position = new Vector3(2, yukseklik, obj.transform.position.z);
 		obj.transform.rotation = Quaternion.Euler(Vector3.zero);
-		Scale(obj);
-
-		yPosRight += 1;
+        Scale(obj);
+        //Destroy(obj2);
+        yPosRight += 1;
 		yPosLeft -= 1;
 		BebeleriSirala();
 	}
 
-	IEnumerator SolaGit(GameObject obj)
+	IEnumerator SolaGit(GameObject obj, float yukseklik)
 	{
 		Vector3 position;
 		float sayac = 0;
+		//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
 		if (leftParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, leftParent.transform.childCount, 0);
@@ -161,7 +177,7 @@ public class GameManager : MonoBehaviour
 			obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
 			yield return new WaitForSeconds(.01f);
 		}
-		obj.transform.position = new Vector3(-2, yPosLeft, obj.transform.position.z);
+		obj.transform.position = new Vector3(-2, yukseklik, obj.transform.position.z);
 		obj.transform.rotation = Quaternion.Euler(Vector3.zero);
 		Scale(obj);
 		yPosRight -= 1;
@@ -218,6 +234,32 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < leftParent.transform.childCount; i++)
 		{
 			leftParent.transform.GetChild(i).SetSiblingIndex((int)leftParent.transform.GetChild(i).transform.position.y);
+		}
+
+	
+	}
+
+	public void BebeleriDiz()
+    {
+		BebeleriSirala();
+		for (int i = 0; i < rightParent.transform.childCount-1; i++)
+		{
+			if(rightParent.transform.GetChild(i+1).transform.position.y - rightParent.transform.GetChild(i).transform.position.y > 1)
+            {
+				rightParent.transform.GetChild(i + 1).transform.position = new Vector3(rightParent.transform.GetChild(i).transform.position.x,
+					 rightParent.transform.GetChild(i).transform.position.y+1, rightParent.transform.GetChild(i).transform.position.z);
+
+			}
+		}
+
+		for (int i = 0; i < leftParent.transform.childCount-1; i++)
+		{
+			if (leftParent.transform.GetChild(i + 1).transform.position.y - leftParent.transform.GetChild(i).transform.position.y > 1)
+			{
+				leftParent.transform.GetChild(i + 1).transform.position = new Vector3(leftParent.transform.GetChild(i).transform.position.x,
+					 leftParent.transform.GetChild(i).transform.position.y + 1, leftParent.transform.GetChild(i).transform.position.z);
+
+			}
 		}
 	}
 }
