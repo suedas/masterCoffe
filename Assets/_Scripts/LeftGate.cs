@@ -29,7 +29,7 @@ public class LeftGate : MonoBehaviour
         if (other.gameObject.CompareTag("-2"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(DestroyMe(2));
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(2));
 
 
         }
@@ -37,20 +37,20 @@ public class LeftGate : MonoBehaviour
         else if (other.gameObject.CompareTag("-10"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(DestroyMe(10));
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(10));
 
         }
         else if (other.gameObject.CompareTag("-6"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(DestroyMe(6));
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(6));
 
         }
         else if (other.gameObject.CompareTag("bolu2"))
         {
-            int child = SwerveMovement.instance.leftParent.childCount / 2;
+            int child = GameManager.instance.leftParent.transform.childCount / 2;
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(DestroyMe(child));
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(child));
         }
         else if (other.gameObject.CompareTag("obstacle"))
         {
@@ -60,101 +60,113 @@ public class LeftGate : MonoBehaviour
                 StartCoroutine(Shake());
 
             }
-            StartCoroutine(DestroyMe(3));
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(3));
         }
         #endregion
         #region PozitiveGate
         else if (other.gameObject.CompareTag("+8"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(8));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(8));
 
         }
         else if (other.gameObject.CompareTag("+12"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(12));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(12));
         }
         else if (other.gameObject.CompareTag("x3"))
         {
-            int child = SwerveMovement.instance.rightParent.childCount * 3;
+            int child = GameManager.instance.rightParent.transform.childCount * 3;
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(child));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(child));
         }
         else if (other.gameObject.CompareTag("+6"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(6));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(6));
         }
         else if (other.gameObject.CompareTag("x2"))
         {
-            int child = SwerveMovement.instance.leftParent.childCount * 2;
+            int child = GameManager.instance.leftParent.transform.childCount * 2;
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(child));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(child));
         }
         else if (other.gameObject.CompareTag("+7"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(7));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(7));
         }
         else if (other.gameObject.CompareTag("+14"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(InstantiateMe(14));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(14));
         }
         #endregion
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("-2") || other.gameObject.CompareTag("bolu2") || other.gameObject.CompareTag("x3") || 
-            other.gameObject.CompareTag("-10") || other.gameObject.CompareTag("+8") || other.gameObject.CompareTag("+12"))
-        {
-           // GameManager.instance.BebeleriDiz();
-        }  
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("-2") || other.gameObject.CompareTag("bolu2") || other.gameObject.CompareTag("x3") || 
+    //        other.gameObject.CompareTag("-10") || other.gameObject.CompareTag("+8") || other.gameObject.CompareTag("+12"))
+    //    {
+    //       // GameManager.instance.BebeleriDiz();
+    //    }  
+    //}
 
-    IEnumerator DestroyMe(int adet)
-    {
+  //  IEnumerator DestroyMe(int adet)
+  //  {
 
-        for (int i = 0; i < adet; i++)
-        {
-            int count = GameManager.instance.leftParent.transform.childCount;
-            int text = GameManager.instance.leftParent.transform.childCount + 1;
+		//for (int i = 0; i < adet; i++)
+		//{
+		//	while (GameManager.instance.leftParent.transform.childCount > 0)
+		//	{
+  //              Vector3 obj2Pos = obj.transform.position;
+  //              GameManager.instance.DestroyLeftChild();
+  //              GameObject obj2 = Instantiate(cupPrefab, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+  //              obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+  //                  Destroy(obj2);
+  //              });
+  //          }
+		//}
 
-            if (count > 0)
-            {
-                if (GameManager.instance.yPosLeft > .5f) GameManager.instance.yPosLeft-=1;
-                GameObject obj = GameManager.instance.leftParent.transform.GetChild(0).gameObject;
-                Vector3 obj2Pos = obj.transform.position;
-                obj.transform.parent = null;
-                StartCoroutine(DestroySahteObje(obj));
-                GameManager.instance.Coffes.Remove(obj);
-                obj.transform.position = new Vector3(0,100,0);
-                for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
-                {
-                    Vector3 position = GameManager.instance.leftParent.transform.GetChild(j).transform.position;
-                    GameManager.instance.leftParent.transform.GetChild(j).transform.position =
-                        new Vector3(position.x, j - 1, position.z);
-                }
-                GameObject obj2 = Instantiate(cupPrefab, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
-                obj2.transform.DOMoveY(50, 2).OnComplete(() => {
-                    Destroy(obj2);
-                });
+  //      for (int i = 0; i < adet; i++)
+  //      {
+  //          int count = GameManager.instance.leftParent.transform.childCount;
+  //          int text = GameManager.instance.leftParent.transform.childCount + 1;
+
+  //          if (count > 0)
+  //          {
+  //              GameObject obj = GameManager.instance.leftParent.transform.GetChild(0).gameObject;
+  //              Vector3 obj2Pos = obj.transform.position;
+  //              obj.transform.parent = null;
+  //              StartCoroutine(DestroySahteObje(obj));
+  //              GameManager.instance.Coffes.Remove(obj);
+  //              obj.transform.position = new Vector3(0,100,0);
+  //              for (int j = 0; j < GameManager.instance.leftParent.transform.childCount; j++)
+  //              {
+  //                  Vector3 position = GameManager.instance.leftParent.transform.GetChild(j).transform.position;
+  //                  GameManager.instance.leftParent.transform.GetChild(j).transform.position =
+  //                      new Vector3(position.x, j - 1, position.z);
+  //              }
+  //              GameObject obj2 = Instantiate(cupPrefab, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+  //              obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+  //                  Destroy(obj2);
+  //              });
                      
-                count = GameManager.instance.leftParent.transform.childCount;
-                LeftCount.text = text.ToString(); 
-            }
-            else
-            {
-                //losePanel
-            }
-            GameManager.instance.BebeleriSirala();
-            yield return new WaitForSeconds(.01f);
-        }
-        GameManager.instance.BebeleriSirala();
-    }
-   public IEnumerator InstantiateMe(int sayac)
+  //              count = GameManager.instance.leftParent.transform.childCount;
+  //              LeftCount.text = text.ToString(); 
+  //          }
+  //          else
+  //          {
+  //              //losePanel
+  //          }
+  //          yield return new WaitForSeconds(.01f);
+  //      }
+  //  }
+
+
+    public IEnumerator InstantiateMe(int sayac)
     {
         for (int i = 0; i < sayac; i++)
         {
@@ -174,15 +186,12 @@ public class LeftGate : MonoBehaviour
                 GameManager.instance.Coffes.Add(GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).gameObject);
                 LeftCount.text = text.ToString();
                 coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).position.y + 1, coffe.transform.position.z);
-                GameManager.instance.yPosLeft+=1;
-
-
+                //GameManager.instance.yPosLeft+=1;
             }
-            GameManager.instance.BebeleriSirala();
             yield return new WaitForSeconds(.01f);
-        }
-       
+        }    
     }
+
      public IEnumerator Shake()
      {
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
@@ -190,24 +199,12 @@ public class LeftGate : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0;
-
      }
+
     public IEnumerator DestroySahteObje(GameObject obj)
     {
         yield return new WaitForSeconds(2);
         Destroy(obj);
 
     }
-    //private void Update()
-    //{
-    //    if (SwerveMovement.instance.hareket==true)
-    //    {
-    //        pingPongLeft();
-    //    }
-    //}
-    //public void pingPongLeft()
-    //{
-    //  transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * .3f, .2f), transform.position.z);
-
-    //}
 }

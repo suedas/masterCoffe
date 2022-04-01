@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	#endregion
 	public bool hareket;
 	bool isRight = false;
-	public int yPosRight, yPosLeft;
+	//public int yPosRight, yPosLeft;
 	public GameObject leftParent, rightParent;
 	Vector3 mousePosition, tempMousePosition;
 	public bool isContinue;
@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
 	{
 		hareket = false;
 		DOTween.Init();
-		yPosLeft = leftParent.transform.childCount;
-		yPosRight = rightParent.transform.childCount;
+		//yPosLeft = leftParent.transform.childCount;
+		//yPosRight = rightParent.transform.childCount;
 		isContinue = true;
 		
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Instantiate(coffePrefab, new Vector3(leftParent.transform.position.x, i, leftParent.transform.position.z), Quaternion.identity, leftParent.transform);
-            GameManager.instance.yPosLeft += 1;
+           // GameManager.instance.yPosLeft += 1;
 
         }
         for (int i = 0; i < leftParent.transform.childCount; i++)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator DelayAndContinue()
 	{
-		yield return new WaitForSeconds(.05f);
+		yield return new WaitForSeconds(.1f);
 		isContinue = true;
 	}
 
@@ -105,32 +105,90 @@ public class GameManager : MonoBehaviour
 			if (isRight) // saða sürükleniyorsa
 			{
 				if (leftParent.transform.childCount > 0)
-				{
-					//StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
-					float y = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position.y;
-					StartCoroutine(SagaGit(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject,y));
-					leftParent.transform.GetChild(leftParent.transform.childCount - 1).parent = rightParent.transform;
+				{					
+					StartCoroutine(SagaGit2(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject));
 				}
 			}
 			else if (!isRight) // sola sürükleniyorsa
 			{
 				if (rightParent.transform.childCount > 0)
-				{
-					//StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
-					float y = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position.y;
-					StartCoroutine(SolaGit(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject,y));
-					rightParent.transform.GetChild(rightParent.transform.childCount - 1).parent = leftParent.transform;
+				{				
+					StartCoroutine(SolaGit2(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject));
 				}
 			}
 		}
 		
 	}
 
-	IEnumerator SagaGit(GameObject obj, float yukseklik)
+	//IEnumerator SagaGit(GameObject obj, float yukseklik)
+	//{
+	//	Vector3 position;
+	//	float sayac = 0;
+	//	//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
+	//	if (rightParent.transform.childCount > 0)
+	//	{
+	//		position = new Vector3(2, rightParent.transform.childCount, 0);
+	//	}
+	//	else
+	//	{
+	//		position = rightParent.transform.position;
+	//	}
+	//	while (obj.transform.position.x < 2 && isRight)
+	//	{
+	//		float y = Mathf.Lerp(yPosLeft, position.y, sayac);
+	//		sayac += .05f;
+	//		obj.transform.position = new Vector3(obj.transform.position.x + .2f, y + Ypos(obj.transform.position.x), obj.transform.position.z);
+	//		obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
+	//		yield return new WaitForSeconds(.01f);
+	//	}
+	//	obj.transform.position = new Vector3(2, yukseklik, obj.transform.position.z);
+	//	obj.transform.rotation = Quaternion.Euler(Vector3.zero);
+ //       Scale(obj);
+ //       //Destroy(obj2);
+ //       yPosRight += 1;
+	//	yPosLeft -= 1;
+	//	BebeleriSirala();
+	//}
+
+	//IEnumerator SolaGit(GameObject obj, float yukseklik)
+	//{
+	//	Vector3 position;
+	//	float sayac = 0;
+	//	//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
+	//	if (leftParent.transform.childCount > 0)
+	//	{
+	//		position = new Vector3(2, leftParent.transform.childCount, 0);
+	//	}
+	//	else
+	//	{
+	//		position = leftParent.transform.position;
+	//	}
+	//	while (obj.transform.position.x > -2 && !isRight)
+	//	{
+	//		float y = Mathf.Lerp(yPosRight, position.y, sayac);
+	//		sayac += .05f;
+	//		obj.transform.position = new Vector3(obj.transform.position.x - .2f, y + Ypos(obj.transform.position.x), obj.transform.position.z);
+	//		obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
+	//		yield return new WaitForSeconds(.01f);
+	//	}
+	//	obj.transform.position = new Vector3(-2, yukseklik, obj.transform.position.z);
+	//	obj.transform.rotation = Quaternion.Euler(Vector3.zero);
+	//	Scale(obj);
+
+	//	yPosRight -= 1;
+	//	yPosLeft += 1;
+	//	BebeleriSirala();
+	//}
+
+
+	IEnumerator SagaGit2(GameObject obj)
 	{
+		DestroyLeftChild();
 		Vector3 position;
 		float sayac = 0;
-		//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
+		float tempY = 0;
+		if (leftParent.transform.childCount > 0) tempY = leftParent.transform.childCount;
+		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.identity);
 		if (rightParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, rightParent.transform.childCount, 0);
@@ -139,28 +197,29 @@ public class GameManager : MonoBehaviour
 		{
 			position = rightParent.transform.position;
 		}
-		while (obj.transform.position.x < 2 && isRight)
+		while (obj2.transform.position.x < 2 && isRight)
 		{
-			float y = Mathf.Lerp(yPosLeft, position.y, sayac);
+			float y = Mathf.Lerp(tempY, position.y, sayac);
 			sayac += .05f;
-			obj.transform.position = new Vector3(obj.transform.position.x + .2f, y + Ypos(obj.transform.position.x), obj.transform.position.z);
-			obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
-			yield return new WaitForSeconds(.01f);
-		}
-		obj.transform.position = new Vector3(2, yukseklik, obj.transform.position.z);
-		obj.transform.rotation = Quaternion.Euler(Vector3.zero);
-        Scale(obj);
-        //Destroy(obj2);
-        yPosRight += 1;
-		yPosLeft -= 1;
-		BebeleriSirala();
+			obj2.transform.position = new Vector3(obj2.transform.position.x + .2f, y + Ypos(obj2.transform.position.x), obj2.transform.position.z);
+			obj2.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj2.transform.position.x) * 90));
+			yield return new WaitForSeconds(.015f);
+		}		
+		Destroy(obj2);
+		CreateRightChild();
+		//yPosRight += 1;
+		//yPosLeft -= 1;
+		//BebeleriSirala();
 	}
 
-	IEnumerator SolaGit(GameObject obj, float yukseklik)
+	IEnumerator SolaGit2(GameObject obj)
 	{
+		DestroyRightChild();
 		Vector3 position;
 		float sayac = 0;
-		//GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2.transform.position, Quaternion.identity);
+		float tempY = 0;
+		if (rightParent.transform.childCount > 0) tempY = rightParent.transform.childCount;
+		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.identity);
 		if (leftParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, leftParent.transform.childCount, 0);
@@ -169,22 +228,20 @@ public class GameManager : MonoBehaviour
 		{
 			position = leftParent.transform.position;
 		}
-		while (obj.transform.position.x > -2 && !isRight)
+		while (obj2.transform.position.x > -2 && !isRight)
 		{
-			float y = Mathf.Lerp(yPosRight, position.y, sayac);
+			float y = Mathf.Lerp(tempY, position.y, sayac);
 			sayac += .05f;
-			obj.transform.position = new Vector3(obj.transform.position.x - .2f, y + Ypos(obj.transform.position.x), obj.transform.position.z);
-			obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj.transform.position.x) * 90));
-			yield return new WaitForSeconds(.01f);
+			obj2.transform.position = new Vector3(obj2.transform.position.x - .2f, y + Ypos(obj2.transform.position.x), obj2.transform.position.z);
+			obj2.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj2.transform.position.x) * 90));
+			yield return new WaitForSeconds(.015f);
 		}
-		obj.transform.position = new Vector3(-2, yukseklik, obj.transform.position.z);
-		obj.transform.rotation = Quaternion.Euler(Vector3.zero);
-		Scale(obj);
-		yPosRight -= 1;
-		yPosLeft += 1;
-		BebeleriSirala();
+		Destroy(obj2);
+		CreateLeftChild();
+		//yPosRight -= 1;
+		//yPosLeft += 1;
+		//BebeleriSirala();
 	}
-
 
 	public float Ypos(float x)
 	{
@@ -261,5 +318,119 @@ public class GameManager : MonoBehaviour
 
 			}
 		}
+	}
+
+	public void CreateLeftChild()
+	{
+		GameObject coffe = Instantiate(coffePrefab.gameObject,
+			new Vector3(-2,leftParent.transform.childCount,leftParent.transform.position.z),
+			Quaternion.identity,leftParent.transform);
+		coffe.SetActive(false);
+		StartCoroutine(DelayAndSetActive(coffe));
+		Coffes.Add(coffe);
+	}
+
+	public void CreateRightChild()
+	{
+		GameObject coffe = Instantiate(coffePrefab.gameObject,
+			new Vector3(2, rightParent.transform.childCount, rightParent.transform.position.z), 
+			Quaternion.identity, rightParent.transform);
+		coffe.SetActive(false);
+		StartCoroutine(DelayAndSetActive(coffe));
+		Coffes.Add(coffe);
+	}
+
+	public void DestroyLeftChild()
+	{
+		if(leftParent.transform.childCount > 0)
+		{
+			Coffes.Remove(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject);
+			Destroy(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject);
+		}
+		
+	}
+
+	public void DestroyRightChild()
+	{
+		if(rightParent.transform.childCount > 0)
+		{
+			Coffes.Remove(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject);
+			Destroy(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject);
+		}
+	}
+
+	public IEnumerator DestroyForLeftGate(int adet)
+	{
+
+		for (int i = 0; i < adet; i++)
+		{
+			if (leftParent.transform.childCount > 0)
+			{
+				Vector3 obj2Pos = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position;
+				DestroyLeftChild();
+				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+					Destroy(obj2);
+				});			
+			}
+			yield return new WaitForSeconds(.05f);
+		}		
+	}
+
+
+	public IEnumerator DestroyForRightGate(int adet)
+	{
+
+		for (int i = 0; i < adet; i++)
+		{
+			if (rightParent.transform.childCount > 0)
+			{
+				Vector3 obj2Pos = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position;
+				DestroyRightChild();
+				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+					Destroy(obj2);
+				});
+			}
+			yield return new WaitForSeconds(.05f);
+		}
+	}
+
+	public IEnumerator InstantiateForLeftGate(int adet)
+	{
+		for (int i = 0; i < adet; i++)
+		{
+			if (leftParent.transform.childCount > 0)
+			{
+				CreateLeftChild();
+			}
+			yield return new WaitForSeconds(.05f);
+		}
+	}
+
+	public IEnumerator InstantiateForRightGate(int adet)
+	{
+		for (int i = 0; i < adet; i++)
+		{
+			if (rightParent.transform.childCount > 0)
+			{
+				CreateRightChild();
+			}
+			yield return new WaitForSeconds(.05f);
+		}
+	}
+
+
+
+	IEnumerator DelayAndDestroyObj(GameObject obj)
+	{
+		yield return new WaitForSeconds(2f);
+		Destroy(obj);
+	}
+
+	IEnumerator DelayAndSetActive(GameObject obj)
+	{
+		yield return new WaitForSeconds(.2f);
+		if(obj != null ) obj.SetActive(true);
 	}
 }

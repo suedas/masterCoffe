@@ -20,19 +20,7 @@ public class PlayerController : MonoBehaviour
     public int lastMoney;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("collectible"))
-        {
-            // score islemleri.. animasyon.. efect.. collectiblen destroy edilmesi.. 
-            Debug.Log("collectible");
-
-        }
-        else if (other.CompareTag("obstacle"))
-        {
-            // score islemleri.. animasyon.. efect.. obstaclein destroy edilmesi.. 
-            // oyun bitebilir bunun kontrolu de burada yapilabilir..
-            Debug.Log("obstacle");
-        }
-        else if (other.CompareTag("finish"))
+        if (other.CompareTag("finish"))
         {
             // oyun sonu olaylari... animasyon.. score.. panel acip kapatmak
             // oyunu kazandi mi kaybetti mi kontntrolu gerekirse yapilabilir.
@@ -40,8 +28,8 @@ public class PlayerController : MonoBehaviour
             //PlayerMovement.instance.speed = 0;
             GameManager.instance.isContinue = false;
             GameManager.instance.hareket = false;
-            GameManager.instance.yPosLeft = 0;
-            GameManager.instance.yPosRight = 0;
+            //GameManager.instance.yPosLeft = 0;
+            //GameManager.instance.yPosRight = 0;
             StartCoroutine(EndGame.instance.IncreaseTime());
             //kahvelerin hareketini de durdur
             UIController.instance.leftImage.SetActive(false);
