@@ -39,7 +39,7 @@ public class SwerveMovement : MonoBehaviour
             
         }
         UIController.instance.coffeCountText();
-        UIController.instance.LosePanel();
+       // UIController.instance.LosePanel();
     }
     private void Start()
     {

@@ -174,7 +174,7 @@ public class RightGate : MonoBehaviour
                     GameManager.instance.rightParent.transform.GetChild(j).transform.position =
                         new Vector3(position.x,j+1,position.z);
                 }
-                GameObject coffe = Instantiate(cupPrefab, instantateChild, Quaternion.identity, transform);
+                GameObject coffe = Instantiate(cupPrefab, instantateChild, Quaternion.Euler(-90, 0, 0), transform);
                 GameManager.instance.Coffes.Add(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
                 coffe.transform.position = new Vector3(coffe.transform.position.x, GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).position.y+1, coffe.transform.position.z);
                // GameManager.instance.yPosRight+=1;

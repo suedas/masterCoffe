@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 	public bool isContinue;
 	public List<GameObject> Coffes = new List<GameObject>();
 	public Transform coffePrefab;
+	public Transform coffeAdd;
 
 
 	private void Start()
@@ -30,23 +31,26 @@ public class GameManager : MonoBehaviour
 		//yPosLeft = leftParent.transform.childCount;
 		//yPosRight = rightParent.transform.childCount;
 		isContinue = true;
-		
 
         //LevelController.instance.instantiateCoffe();
         for (int i = 0; i < 4; i++)
         {
-            Instantiate(coffePrefab, new Vector3(leftParent.transform.position.x, i, leftParent.transform.position.z), Quaternion.identity, leftParent.transform);
-           // GameManager.instance.yPosLeft += 1;
+			coffeAdd= Instantiate(coffePrefab, new Vector3(leftParent.transform.position.x, i+1, leftParent.transform.position.z), Quaternion.Euler(-90,0,0), leftParent.transform);
+			Debug.Log(leftParent.transform.childCount);
+			for (int j = 0; j < leftParent.transform.childCount; j++)
+			{
+				Coffes.Add(leftParent.transform.GetChild(i).gameObject);
+			}
+			//Coffes.Add(coffeAdd.gameObject);
 
-        }
-        for (int i = 0; i < leftParent.transform.childCount; i++)
-        {
-			Coffes.Add(leftParent.transform.GetChild(i).gameObject);
-        }
-		for (int i = 0; i < rightParent.transform.childCount; i++)
-		{
-			Coffes.Add(rightParent.transform.GetChild(i).gameObject);
+			// GameManager.instance.yPosLeft += 1;
+
 		}
+		
+		//for (int i = 0; i < rightParent.transform.childCount; i++)
+		//{
+		//	Coffes.Add(rightParent.transform.GetChild(i).gameObject);
+		//}
         UIController.instance.LeftCount.text = leftParent.transform.childCount.ToString();
         UIController.instance.RightCount.text = rightParent.transform.childCount.ToString();
     }
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
         if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket == true)
         {
 			UIController.instance.LosePanel();
+		
         }
 
 		if (hareket)
@@ -188,7 +193,7 @@ public class GameManager : MonoBehaviour
 		float sayac = 0;
 		float tempY = 0;
 		if (leftParent.transform.childCount > 0) tempY = leftParent.transform.childCount;
-		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.identity);
+		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.Euler(-90, 0, 0));
 		if (rightParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, rightParent.transform.childCount, 0);
@@ -202,7 +207,7 @@ public class GameManager : MonoBehaviour
 			float y = Mathf.Lerp(tempY, position.y, sayac);
 			sayac += .05f;
 			obj2.transform.position = new Vector3(obj2.transform.position.x + .2f, y + Ypos(obj2.transform.position.x), obj2.transform.position.z);
-			obj2.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj2.transform.position.x) * 90));
+			obj2.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, (2 - obj2.transform.position.x) * 90));
 			yield return new WaitForSeconds(.015f);
 		}		
 		Destroy(obj2);
@@ -219,7 +224,7 @@ public class GameManager : MonoBehaviour
 		float sayac = 0;
 		float tempY = 0;
 		if (rightParent.transform.childCount > 0) tempY = rightParent.transform.childCount;
-		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.identity);
+		GameObject obj2 = Instantiate(coffePrefab.gameObject, obj.transform.position, Quaternion.Euler(-90, 0, 0));
 		if (leftParent.transform.childCount > 0)
 		{
 			position = new Vector3(2, leftParent.transform.childCount, 0);
@@ -233,7 +238,7 @@ public class GameManager : MonoBehaviour
 			float y = Mathf.Lerp(tempY, position.y, sayac);
 			sayac += .05f;
 			obj2.transform.position = new Vector3(obj2.transform.position.x - .2f, y + Ypos(obj2.transform.position.x), obj2.transform.position.z);
-			obj2.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (2 - obj2.transform.position.x) * 90));
+			obj2.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, (2 - obj2.transform.position.x) * 90));
 			yield return new WaitForSeconds(.015f);
 		}
 		Destroy(obj2);
@@ -323,8 +328,8 @@ public class GameManager : MonoBehaviour
 	public void CreateLeftChild()
 	{
 		GameObject coffe = Instantiate(coffePrefab.gameObject,
-			new Vector3(-2,leftParent.transform.childCount,leftParent.transform.position.z),
-			Quaternion.identity,leftParent.transform);
+			new Vector3(-2,leftParent.transform.childCount+.8f,leftParent.transform.position.z),
+			 Quaternion.Euler(-90, 0, 0), leftParent.transform);
 		coffe.SetActive(false);
 		StartCoroutine(DelayAndSetActive(coffe));
 		Coffes.Add(coffe);
@@ -333,8 +338,8 @@ public class GameManager : MonoBehaviour
 	public void CreateRightChild()
 	{
 		GameObject coffe = Instantiate(coffePrefab.gameObject,
-			new Vector3(2, rightParent.transform.childCount, rightParent.transform.position.z), 
-			Quaternion.identity, rightParent.transform);
+			new Vector3(2, rightParent.transform.childCount+.8f, rightParent.transform.position.z),
+			 Quaternion.Euler(-90, 0, 0), rightParent.transform);
 		coffe.SetActive(false);
 		StartCoroutine(DelayAndSetActive(coffe));
 		Coffes.Add(coffe);
@@ -368,7 +373,7 @@ public class GameManager : MonoBehaviour
 			{
 				Vector3 obj2Pos = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position;
 				DestroyLeftChild();
-				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
 				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
 				});			
@@ -387,7 +392,7 @@ public class GameManager : MonoBehaviour
 			{
 				Vector3 obj2Pos = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position;
 				DestroyRightChild();
-				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.identity); // yukarý fýrlama efekti için sahte obje
+				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
 				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
 				});

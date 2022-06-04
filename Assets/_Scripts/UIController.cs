@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour
         PlayerMovement.instance.speed = 4;
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
-        Debug.Log("baþlarken coffe sayýsý "+" "+ GameManager.instance.Coffes.Count);
+       // Debug.Log("baþlarken coffe sayýsý "+" "+ GameManager.instance.Coffes.Count);
         LeftCount.enabled = true;
         RightCount.enabled =true;
 

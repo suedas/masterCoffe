@@ -109,7 +109,7 @@ public class LevelController : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-			Instantiate(coffePrefab,new Vector3(GameManager.instance.leftParent.transform.position.x, i, GameManager.instance.leftParent.transform.position.z),Quaternion.identity,GameManager.instance.leftParent.transform);
+			Instantiate(coffePrefab,new Vector3(GameManager.instance.leftParent.transform.position.x, i, GameManager.instance.leftParent.transform.position.z), Quaternion.Euler(-90, 0, 0), GameManager.instance.leftParent.transform);
 			//GameManager.instance.Coffes.Add(coffePrefab.gameObject);
 			//GameManager.instance.yPosLeft += 1;
 
