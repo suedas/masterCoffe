@@ -20,25 +20,25 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   m_AmbientGroundColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 617d9be015db68348a623b01ea51a8c5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_Sun: {fileID: 1455854534}
+  m_IndirectSpecularColor: {r: 0.47698158, g: 0.7989754, b: 0.8985044, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.46205357, y: 1}
+    m_SensorSize: {x: 0.56275636, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vcam: {fileID: 8612314}
-  cupPrefab: {fileID: 6808808945443994855, guid: 3be36931bca6ff142be8d9d61d31e1f7, type: 3}
+  cupPrefab: {fileID: 690385669625315526, guid: 9ade7025965428746b96f913d545493c, type: 3}
 --- !u!1 &257803298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,13 +1455,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.5
-  m_fontSizeBase: 66.5
+  m_fontSize: 73.6
+  m_fontSizeBase: 73.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   - {fileID: 1796634086400312022, guid: be1f312b6fb500f479ee95e8f3aa8575, type: 3}
   - {fileID: 1796634086400312022, guid: d05fab4256ba53c4888a62a7615134e5, type: 3}
   - {fileID: 1796634086400312022, guid: ec9debbd81d97024386fb3120db23e66, type: 3}
-  coffePrefab: {fileID: 6808808945443994852, guid: 3be36931bca6ff142be8d9d61d31e1f7, type: 3}
+  coffePrefab: {fileID: 207005841461205628, guid: 9ade7025965428746b96f913d545493c, type: 3}
   coffe: []
   "\xF6ncekicoin": 0
   currentLevelNo: 0
@@ -3355,7 +3355,8 @@ MonoBehaviour:
   rightParent: {fileID: 175526543}
   isContinue: 0
   Coffes: []
-  coffePrefab: {fileID: 6808808945443994852, guid: 3be36931bca6ff142be8d9d61d31e1f7, type: 3}
+  coffePrefab: {fileID: 207005841461205628, guid: 9ade7025965428746b96f913d545493c, type: 3}
+  coffeAdd: {fileID: 0}
 --- !u!1 &1597856530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,7 +3489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftCount: {fileID: 878980986}
   vcam: {fileID: 8612314}
-  cupPrefab: {fileID: 6808808945443994855, guid: 3be36931bca6ff142be8d9d61d31e1f7, type: 3}
+  cupPrefab: {fileID: 690385669625315526, guid: 9ade7025965428746b96f913d545493c, type: 3}
 --- !u!1 &1606908143
 GameObject:
   m_ObjectHideFlags: 0

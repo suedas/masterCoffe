@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
 	public void CreateRightChild()
 	{
 		GameObject coffe = Instantiate(coffePrefab.gameObject,
-			new Vector3(2, rightParent.transform.childCount+.8f, rightParent.transform.position.z),
+			new Vector3(2, rightParent.transform.childCount+.8f , rightParent.transform.position.z),
 			 Quaternion.Euler(-90, 0, 0), rightParent.transform);
 		coffe.SetActive(false);
 		StartCoroutine(DelayAndSetActive(coffe));
