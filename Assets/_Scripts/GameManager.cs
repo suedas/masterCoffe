@@ -57,12 +57,14 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		UIController.instance.coffeCountText();
-        if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket == true)
-        {
-			UIController.instance.LosePanel();
-		
-        }
+        //UIController.instance.coffeCountText();
+
+        //     if (GameManager.instance.Coffes.Count < 0 && GameManager.instance.hareket == true)
+        //     {
+        //UIController.instance.LosePanel();
+
+        //     }
+      
 
 		if (hareket)
         {
@@ -333,6 +335,7 @@ public class GameManager : MonoBehaviour
 		coffe.SetActive(false);
 		StartCoroutine(DelayAndSetActive(coffe));
 		Coffes.Add(coffe);
+		UIController.instance.coffeCountText();
 	}
 
 	public void CreateRightChild()
@@ -343,6 +346,7 @@ public class GameManager : MonoBehaviour
 		coffe.SetActive(false);
 		StartCoroutine(DelayAndSetActive(coffe));
 		Coffes.Add(coffe);
+		UIController.instance.coffeCountText();
 	}
 
 	public void DestroyLeftChild()
@@ -351,7 +355,9 @@ public class GameManager : MonoBehaviour
 		{
 			Coffes.Remove(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject);
 			Destroy(leftParent.transform.GetChild(leftParent.transform.childCount - 1).gameObject);
+			UIController.instance.coffeCountText();
 		}
+   
 		
 	}
 
@@ -361,7 +367,9 @@ public class GameManager : MonoBehaviour
 		{
 			Coffes.Remove(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject);
 			Destroy(rightParent.transform.GetChild(rightParent.transform.childCount - 1).gameObject);
+			UIController.instance.coffeCountText();
 		}
+	
 	}
 
 	public IEnumerator DestroyForLeftGate(int adet)
@@ -374,10 +382,20 @@ public class GameManager : MonoBehaviour
 				Vector3 obj2Pos = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position;
 				DestroyLeftChild();
 				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
-				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+				obj2.transform.DOJump(new Vector3(Random.Range(-50,50), 60, Random.Range(-50, 50)), 5, 1, 5f).OnComplete(() => {
+
+					//obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
 				});			
 			}
+            else
+            {
+                if (rightParent.transform.childCount==0)
+                {
+					UIController.instance.LosePanel();
+                }
+            }
+			
 			yield return new WaitForSeconds(.05f);
 		}		
 	}
@@ -393,10 +411,20 @@ public class GameManager : MonoBehaviour
 				Vector3 obj2Pos = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position;
 				DestroyRightChild();
 				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
-				obj2.transform.DOMoveY(50, 2).OnComplete(() => {
+				obj2.transform.DOJump(new Vector3(Random.Range(-50, 50), 60, Random.Range(-50, 50)), 5, 1, 5f).OnComplete(() => {
+					//obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
 				});
 			}
+
+			else
+			{
+				if (leftParent.transform.childCount == 0)
+				{
+					UIController.instance.LosePanel();
+				}
+			}
+
 			yield return new WaitForSeconds(.05f);
 		}
 	}

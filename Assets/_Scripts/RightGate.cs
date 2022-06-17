@@ -49,6 +49,12 @@ public class RightGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.DestroyForRightGate(child));
         }
+        else if (other.gameObject.CompareTag("bolu1"))
+        {
+            int child = GameManager.instance.leftParent.transform.childCount / 1;
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(child));
+        }
         else if (other.gameObject.CompareTag("obstacle"))
         {
             //vcam.transform.DOShakeRotation(0.2f, 30, fadeOut: true);
@@ -68,6 +74,11 @@ public class RightGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.InstantiateForRightGate(8));
 
+        }
+        else if (other.gameObject.CompareTag("+4"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(GameManager.instance.InstantiateForRightGate(4));
         }
         else if (other.gameObject.CompareTag("+12"))
         {
@@ -96,10 +107,10 @@ public class RightGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.InstantiateForRightGate(7));
         }
-        else if (other.gameObject.CompareTag("+14"))
+        else if (other.gameObject.CompareTag("+2"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(GameManager.instance.InstantiateForRightGate(14));
+            StartCoroutine(GameManager.instance.InstantiateForRightGate(2));
         }
         #endregion
     }

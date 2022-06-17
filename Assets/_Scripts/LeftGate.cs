@@ -31,7 +31,6 @@ public class LeftGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.DestroyForLeftGate(2));
 
-
         }
 
         else if (other.gameObject.CompareTag("-10"))
@@ -52,6 +51,12 @@ public class LeftGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.DestroyForLeftGate(child));
         }
+        else if (other.gameObject.CompareTag("bolu1"))
+        {
+            int child = GameManager.instance.leftParent.transform.childCount / 1;
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(GameManager.instance.DestroyForLeftGate(child));
+        }
         else if (other.gameObject.CompareTag("obstacle"))
         {
             other.GetComponent<Collider>().enabled = false;
@@ -69,6 +74,11 @@ public class LeftGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.InstantiateForLeftGate(8));
 
+        }
+        else if (other.gameObject.CompareTag("+4"))
+        {
+            other.GetComponent<Collider>().enabled = false;
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(4));
         }
         else if (other.gameObject.CompareTag("+12"))
         {
@@ -97,10 +107,10 @@ public class LeftGate : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             StartCoroutine(GameManager.instance.InstantiateForLeftGate(7));
         }
-        else if (other.gameObject.CompareTag("+14"))
+        else if (other.gameObject.CompareTag("+2"))
         {
             other.GetComponent<Collider>().enabled = false;
-            StartCoroutine(GameManager.instance.InstantiateForLeftGate(14));
+            StartCoroutine(GameManager.instance.InstantiateForLeftGate(2));
         }
         #endregion
     }

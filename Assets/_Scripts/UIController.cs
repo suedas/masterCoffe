@@ -25,12 +25,14 @@ public class UIController : MonoBehaviour
     {
         GameManager.instance.hareket = true;
         GameManager.instance.isContinue = true;
-        PlayerMovement.instance.speed = 4;
+        PlayerMovement.instance.speed = 7;
         // .gameObject.SetActive(false);
         tapToStartPanel.SetActive(false);
        // Debug.Log("baþlarken coffe sayýsý "+" "+ GameManager.instance.Coffes.Count);
-        LeftCount.enabled = true;
-        RightCount.enabled =true;
+        //LeftCount.enabled = true;
+        //RightCount.enabled =true;
+        leftImage.SetActive(true);
+        rightImage.SetActive(true);
 
     }
     public void coffeCountText()
@@ -45,9 +47,11 @@ public class UIController : MonoBehaviour
        // if (GameManager.instance.Coffes.Count == 0 && GameManager.instance.hareket==true)
         //{
             
-            losePanel.SetActive(true);
-            LeftCount.enabled = false;
-            RightCount.enabled = false;
+             losePanel.SetActive(true);
+            //LeftCount.enabled = false;
+            //RightCount.enabled = false;
+            leftImage.SetActive(false);
+            rightImage.SetActive(false);
             GameManager.instance.hareket = false;
             PlayerMovement.instance.speed = 0;
            // RetryClickButton();

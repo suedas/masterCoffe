@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 207005841461205628}
   - component: {fileID: 3850776839181489625}
   - component: {fileID: 1338768020367352083}
+  - component: {fileID: 250453755937648343}
   m_Layer: 0
   m_Name: cofee
   m_TagString: coffe
@@ -85,3 +86,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &250453755937648343
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690385669625315526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.1900783, y: 4.1037745, z: 1.7836254}
+  m_Center: {x: -0.0031330585, y: -0.07366299, z: 0.65417254}
