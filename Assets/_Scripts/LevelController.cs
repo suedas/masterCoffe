@@ -40,26 +40,26 @@ public class LevelController : MonoBehaviour
 		if (totalLevelNo > LevelPrefabs.Count)
 		{
 			currentLevelNo = Random.Range(1, LevelPrefabs.Count + 1);
-			UIController.instance.LevelText.text = currentLevelNo.ToString();
+			UIController.instance.LevelText.text = "LEVEL "+currentLevelNo.ToString();
 
 		}
 		else
 		{
 			currentLevelNo = totalLevelNo;
-			UIController.instance.LevelText.text = currentLevelNo.ToString();
+			UIController.instance.LevelText.text = "LEVEL " + currentLevelNo.ToString();
 
 		}
 		if (currentLevelObj == null)
 		{
 			currentLevelObj = Instantiate(LevelPrefabs[currentLevelNo - 1], Vector3.zero, Quaternion.identity);
-			UIController.instance.LevelText.text = currentLevelNo.ToString();
+			UIController.instance.LevelText.text = "LEVEL " + currentLevelNo.ToString();
 
 		}
 		else
 		{
 			Destroy(currentLevelObj);
 			currentLevelObj = Instantiate(LevelPrefabs[currentLevelNo - 1], Vector3.zero, Quaternion.identity);
-			UIController.instance.LevelText.text = currentLevelNo.ToString();
+			UIController.instance.LevelText.text = "LEVEL " + currentLevelNo.ToString();
 
 		}
 	}
