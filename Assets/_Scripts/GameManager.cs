@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
 			coffeAdd= Instantiate(coffePrefab, new Vector3(leftParent.transform.position.x, i+1, leftParent.transform.position.z), Quaternion.Euler(-90,0,0), leftParent.transform);
-			Debug.Log(leftParent.transform.childCount);
+			//Debug.Log(leftParent.transform.childCount);
 			for (int j = 0; j < leftParent.transform.childCount; j++)
 			{
 				Coffes.Add(leftParent.transform.GetChild(i).gameObject);
@@ -382,7 +382,7 @@ public class GameManager : MonoBehaviour
 				Vector3 obj2Pos = leftParent.transform.GetChild(leftParent.transform.childCount - 1).transform.position;
 				DestroyLeftChild();
 				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
-				obj2.transform.DOJump(new Vector3(Random.Range(-50,50), 60, Random.Range(-50, 50)), 5, 1, 5f).OnComplete(() => {
+				obj2.transform.DOJump(new Vector3(Random.Range(-50,50), 60, Random.Range(10, 50)), 5, 1, 5f).OnComplete(() => {
 
 					//obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
@@ -411,7 +411,7 @@ public class GameManager : MonoBehaviour
 				Vector3 obj2Pos = rightParent.transform.GetChild(rightParent.transform.childCount - 1).transform.position;
 				DestroyRightChild();
 				GameObject obj2 = Instantiate(coffePrefab.gameObject, obj2Pos, Quaternion.Euler(-90, 0, 0)); // yukarý fýrlama efekti için sahte obje
-				obj2.transform.DOJump(new Vector3(Random.Range(-50, 50), 60, Random.Range(-50, 50)), 5, 1, 5f).OnComplete(() => {
+				obj2.transform.DOJump(new Vector3(Random.Range(-50, 50), 60, Random.Range(10, 50)), 5, 1, 5f).OnComplete(() => {
 					//obj2.transform.DOMoveY(50, 2).OnComplete(() => {
 					Destroy(obj2);
 				});

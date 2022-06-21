@@ -61,7 +61,8 @@ public class UIController : MonoBehaviour
     public void WinPanel()
     {
         winPanel.SetActive(true);
-       // PlayerMovement.instance.speed = 0;
+        PlayerMovement.instance.speed = 0;
+        GameManager.instance.hareket = false;
 
     }
     public void Score()

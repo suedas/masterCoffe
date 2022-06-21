@@ -18,10 +18,18 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //Transform ss = SwerveMovement.instance.Coffes[SwerveMovement.instance.Coffes.Count / 2].gameObject.transform;
+        if (GameManager.instance.hareket==true)
+        {
             transform.Translate(0, 0, speed * Time.deltaTime);
-           // vcam.LookAt = ss;
 
-             
+        }
+
+        
+
+        
+        // vcam.LookAt = ss;
+
+
     }
 
 }

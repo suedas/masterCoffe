@@ -76,7 +76,7 @@ public class LevelController : MonoBehaviour
 		UIController.instance.rightImage.SetActive(true);
 		DestroyCoffe();
 		instantiateCoffe();
-		Debug.Log(GameManager.instance.Coffes.Count);
+		//Debug.Log(GameManager.instance.Coffes.Count);
 
 
 		//LeftGate.instance.InstantiateMe(4);

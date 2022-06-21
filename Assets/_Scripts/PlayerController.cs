@@ -21,22 +21,30 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("finish"))
-        {
+        {   coin = GameManager.instance.Coffes.Count;
+            lastMoney = System.Int32.Parse(UIController.instance.ScoreText.text);
+            GameManager.instance.isContinue = false;
+            //GameManager.instance.hareket = false;
+            UIController.instance.leftImage.SetActive(false);
+            UIController.instance.rightImage.SetActive(false);
+
             // oyun sonu olaylari... animasyon.. score.. panel acip kapatmak
             // oyunu kazandi mi kaybetti mi kontntrolu gerekirse yapilabilir.
             // player durdurulur
             //PlayerMovement.instance.speed = 0;
-            GameManager.instance.isContinue = false;
-            GameManager.instance.hareket = false;
-            //GameManager.instance.yPosLeft = 0;
-            //GameManager.instance.yPosRight = 0;
-            StartCoroutine(EndGame.instance.IncreaseTime());
-            //kahvelerin hareketini de durdur
-            UIController.instance.leftImage.SetActive(false);
-            UIController.instance.rightImage.SetActive(false);
 
-            coin = GameManager.instance.Coffes.Count;
-            lastMoney = System.Int32.Parse(UIController.instance.ScoreText.text);
+            StartCoroutine(EndGame.instance.IncreaseTime());
+
+            //if (coin > 0)
+            //{
+            //    StartCoroutine(EndGame.instance.IncreaseTime());
+            //}
+            //else
+            //{
+            //    UIController.instance.LosePanel();
+            //}
+
+
 
 
         }
@@ -46,7 +54,7 @@ public class PlayerController : MonoBehaviour
             EndGame.instance.ServisEt(other.gameObject);
             GameObject obj = Instantiate(para, other.transform.position, Quaternion.identity);
             obj.transform.DOMove(paraTarget.transform.position, .5f);
-            obj.transform.DOScale(2f, .48f).OnComplete(() => 
+            obj.transform.DOScale(4f, .48f).OnComplete(() => 
             {
                 lastMoney += 2;
                 UIController.instance.ScoreText.text = lastMoney.ToString();
