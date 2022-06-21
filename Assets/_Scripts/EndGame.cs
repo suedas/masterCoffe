@@ -29,7 +29,7 @@ public class EndGame : MonoBehaviour
             {
                 if (GameManager.instance.rightParent.transform.childCount > 0)
                 {
-                    GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.DOJump(new Vector3( other.transform.position.x,other.transform.position.y+1,other.transform.position.z), 2, 1, .5f);
+                    GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.DOJump(new Vector3( other.transform.position.x,other.transform.position.y+.2f,other.transform.position.z), 2, 1, .5f);
                     sagdanGit = false;
                     GameManager.instance.Coffes.Remove(GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).gameObject);
                     GameManager.instance.rightParent.transform.GetChild(GameManager.instance.rightParent.transform.childCount - 1).transform.parent = null;
@@ -46,7 +46,7 @@ public class EndGame : MonoBehaviour
             {
                 if (GameManager.instance.leftParent.transform.childCount > 0)
                 {
-                    GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.DOJump(new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z), 2, 1, .5f);
+                    GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.DOJump(new Vector3(other.transform.position.x, other.transform.position.y + .2f, other.transform.position.z), 2, 1, .5f);
                     sagdanGit = true;
                     GameManager.instance.Coffes.Remove(GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).gameObject);
                     GameManager.instance.leftParent.transform.GetChild(GameManager.instance.leftParent.transform.childCount - 1).transform.parent = null;

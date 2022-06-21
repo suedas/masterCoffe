@@ -63,6 +63,8 @@ public class UIController : MonoBehaviour
         winPanel.SetActive(true);
         PlayerMovement.instance.speed = 0;
         GameManager.instance.hareket = false;
+        RightCount.text ="0";
+        LeftCount.text = "4";
 
     }
     public void Score()

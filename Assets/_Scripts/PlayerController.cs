@@ -62,5 +62,16 @@ public class PlayerController : MonoBehaviour
             });
 
         }
+        else if (other.CompareTag("end"))
+        {
+           
+
+            PlayerMovement.instance.speed = 0;
+            GameManager.instance.hareket = false;
+            GameManager.instance.isContinue = false;
+            StopCoroutine(EndGame.instance.IncreaseTime());
+            UIController.instance.WinPanel();
+
+        }
     }
 }
