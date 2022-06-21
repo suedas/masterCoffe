@@ -80,13 +80,13 @@ public class EndGame : MonoBehaviour
 
    public IEnumerator IncreaseTime()
     {
-        PlayerMovement.instance.speed = 0;
+        PlayerMovement.instance.speed = 2;
         yield return new WaitForSeconds(.1f);
         while (GameManager.instance.Coffes.Count > 0)
         {
-            if (PlayerMovement.instance.speed <= 10)
+            if (PlayerMovement.instance.speed <= 15)
             {
-                PlayerMovement.instance.speed += 0.05f;
+                PlayerMovement.instance.speed += 0.1f;
 
             }
             yield return new WaitForSeconds(.05f);
